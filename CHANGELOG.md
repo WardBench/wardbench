@@ -28,11 +28,11 @@ A stratified 20-task subset is run three times with identical LocalAI settings t
 
 ### Review packet
 
-`review/` holds an English and Russian policy matrix, a CSV of two tasks per template for clinician or DPO review, and one-page review instructions. The packet is for human judgment of the *benchmark*, not of a model.
+`review/` holds an English policy matrix, a CSV of two tasks per template for clinician or DPO review, and one-page review instructions. The packet is for human judgment of the *benchmark*, not of a model.
 
 ### Model run (after gates)
 
-qwen3-14b on `tasks/dev.jsonl` with control twins, record then prompt if time allows. Outputs land in `results/v0.3/`. Prompt tokens above 80% of `n_ctx` are flagged. Reports for external review are under `reports/`.
+qwen3-14b on `tasks/dev.jsonl` with control twins, record then prompt. Outputs land in `results/v0.3/`. Prompt tokens above 80% of `n_ctx` are flagged.
 
 ## v0.2
 
