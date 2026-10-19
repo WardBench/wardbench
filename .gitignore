@@ -1,0 +1,38 @@
+# Secrets
+.env
+.env.*
+!.env.example
+.pypirc
+*.pem
+
+# Local only
+.cloudflare/
+.cursor/
+work/
+output/
+
+# Test pool must stay unpublished until the held-out release
+cohort/test/
+cohort/test_manifest.json
+tasks/test.jsonl
+results/v0.3/reliability_raw/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store

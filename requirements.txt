@@ -1,0 +1,5 @@
+jsonschema>=4
+anthropic
+openai
+PyYAML>=6
+pytest>=8

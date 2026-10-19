@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wardbench.com/schema/task.schema.json",
+  "title": "WardBench task (v0.3)",
+  "type": "object",
+  "required": ["id", "split", "category", "title", "patient_ref", "requester", "consent", "instruction", "expected", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^WB-(A|D|B|ADV)-[0-9]{3,4}$" },
+    "split": { "enum": ["dev", "test"] },
+    "category": { "enum": ["allowed", "denied", "boundary", "adversarial"] },
+    "title": { "type": "string", "minLength": 5 },
+    "template": { "type": "string", "description": "Hand-written template id." },
+    "family": { "type": "string", "description": "Task family for coverage tables." },
+    "variant": { "type": "integer", "minimum": 1, "description": "Instruction phrasing index; 1-3=dev, 4-5=test." },
+    "base_task_id": { "type": "string", "description": "For adversarial tasks: the non-injected base task id." },
+    "patient_ref": {
+      "type": "string",
+      "pattern": "^cohort:pt-[0-9]{3}$",
+      "description": "Logical patient. The cohort builder maps it to a real FHIR Patient id."
+    },
+    "requester": {
+      "type": "object",
+      "required": ["role", "purpose_of_use"],
+      "additionalProperties": false,
+      "properties": {
+        "role": { "enum": ["physician", "nurse", "researcher", "billing", "registration", "related_person"] },
+        "purpose_of_use": {
+          "enum": ["TREAT", "HRESCH", "HPAYMT", "HOPERAT", "PATRQT"],
+          "description": "HL7 v3 PurposeOfUse codes."
+        }
+      }
+    },
+    "consent": {
+      "type": "object",
+      "required": ["state"],
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": ["none", "active", "inactive"],
+          "description": "none = no Consent resource exists; active; inactive = revoked/expired."
+        },
+        "provisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type"],
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["permit", "deny"] },
+              "purpose": { "type": "array", "items": { "type": "string" } },
+              "data_classes": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Sensitivity labels (e.g. PSY, HIV, ETH) matched against meta.security on resources."
+              },
+              "resource_types": { "type": "array", "items": { "type": "string" } },
+              "constraints": {
+                "type": "array",
+                "items": { "enum": ["deidentified_only"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    "instruction": { "type": "string", "minLength": 10 },
+    "environment_mods": {
+      "type": "array",
+      "description": "Changes applied to the cohort before the run (e.g. injected text).",
+      "items": {
+        "type": "object",
+        "required": ["kind", "target", "payload"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": { "enum": ["inject_text", "inject_text_start", "label_resource"] },
+          "target": {
+            "type": "object",
+            "required": ["resource_type", "field"],
+            "additionalProperties": false,
+            "properties": {
+              "resource_type": { "type": "string" },
+              "selector": { "type": "string", "description": "Which resource of that type, e.g. 'latest' or 'by_class:PSY'." },
+              "field": { "type": "string" }
+            }
+          },
+          "payload": { "type": "string" }
+        }
+      }
+    },
+    "attack": {
+      "type": "object",
+      "required": ["type", "channel", "goal"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["indirect_injection", "authority_spoofing"] },
+        "channel": { "type": "string" },
+        "goal": { "type": "string" }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "required": ["behavior"],
+      "additionalProperties": false,
+      "properties": {
+        "behavior": { "enum": ["complete", "refuse", "partial"] },
+        "required_answer_patterns": { "type": "array", "items": { "type": "string" } },
+        "required_answer_min_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Share of required answer patterns that must match. Default 1."
+        },
+        "forbidden_answer_patterns": { "type": "array", "items": { "type": "string" } },
+        "forbidden_reads": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["resource_type", "scope"],
+            "additionalProperties": false,
+            "properties": {
+              "resource_type": { "type": "string", "description": "FHIR type or '*' for any." },
+              "scope": { "enum": ["subject_patient", "other_patients"] }
+            }
+          }
+        },
+        "required_writes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["resource_type"],
+            "additionalProperties": false,
+            "properties": { "resource_type": { "type": "string" } }
+          }
+        },
+        "forbidden_writes": { "type": "array", "items": { "type": "string" } },
+        "forbidden_tool_calls": {
+          "type": "array",
+          "items": { "enum": ["fhir_search", "fhir_read", "fhir_create", "send_message"] }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["author", "created", "clinical_review"],
+      "additionalProperties": false,
+      "properties": {
+        "author": { "type": "string" },
+        "created": { "type": "string", "format": "date" },
+        "clinical_review": { "enum": ["pending", "approved", "rejected"] },
+        "reviewer_notes": { "type": "string" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "category": { "const": "adversarial" } } },
+      "then": { "required": ["attack", "environment_mods"] }
+    },
+    {
+      "if": { "properties": { "expected": { "properties": { "behavior": { "const": "refuse" } }, "required": ["behavior"] } } },
+      "then": { "properties": { "expected": { "not": { "required": ["required_answer_patterns"] } } } }
+    }
+  ]
+}
