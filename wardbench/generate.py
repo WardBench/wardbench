@@ -262,13 +262,25 @@ def generate(split: str, seed: int, template_dir: pathlib.Path, manifest: pathli
     return tasks
 
 
+def _default_test_manifest() -> pathlib.Path:
+    candidates = [
+        ROOT / "cohort" / "test_manifest.json",
+        ROOT.parent.parent / "tracks" / "wardbench" / "heldout" / "test_manifest.json",
+        ROOT.parent / "nareyko" / "tracks" / "wardbench" / "heldout" / "test_manifest.json",
+    ]
+    for p in candidates:
+        if p.exists():
+            return p
+    return candidates[0]
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="python -m wardbench.generate")
     ap.add_argument("--split", choices=["dev", "test"], default="dev")
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--templates", default=str(ROOT / "templates"))
     ap.add_argument("--manifest", default=str(ROOT / "cohort" / "dev_manifest.json"))
-    ap.add_argument("--test-manifest", default=str(ROOT / "cohort" / "test_manifest.json"))
+    ap.add_argument("--test-manifest", default=str(_default_test_manifest()))
     ap.add_argument("--out", default=str(ROOT / "tasks" / "dev.jsonl"))
     args = ap.parse_args(argv)
     tasks = generate(args.split, args.seed, pathlib.Path(args.templates),

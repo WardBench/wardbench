@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Build reports/R1..R6 and ALL.md (<=400 lines) plus summary.json."""
+"""Build R1..R6 and ALL.md (untruncated) plus summary.json into the private track reports folder."""
 from __future__ import annotations
 
+import argparse
 import json
 import pathlib
 import random
@@ -20,8 +21,19 @@ from wardbench.stats import (  # noqa: E402
 )
 from wardbench.world import World, build_consent  # noqa: E402
 
-REP = ROOT / "reports"
 V03 = ROOT / "results" / "v0.3"
+
+
+def _default_reports_dir() -> pathlib.Path:
+    candidates = [
+        ROOT.parent.parent / "tracks" / "wardbench" / "reports",
+        ROOT.parent / "nareyko" / "tracks" / "wardbench" / "reports",
+        ROOT / "reports",
+    ]
+    for p in candidates:
+        if p.parent.exists():
+            return p
+    return candidates[-1]
 
 
 def load_jsonl(path):
@@ -41,14 +53,18 @@ def fmt_rate(obj):
     return f"{obj['k']}/{obj['n']}={pct(obj['rate'])} (Wilson {pct(lo)}–{pct(hi)})"
 
 
-def write(name, lines):
-    path = REP / name
-    path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
-    return path
+def main(argv=None):
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out-dir", default=str(_default_reports_dir()))
+    args = ap.parse_args(argv)
+    rep = pathlib.Path(args.out_dir)
+    rep.mkdir(parents=True, exist_ok=True)
 
+    def write(name, lines):
+        path = rep / name
+        path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+        return path
 
-def main():
-    REP.mkdir(exist_ok=True)
     tasks = load_jsonl(ROOT / "tasks" / "dev.jsonl")
     meta = json.loads((ROOT / "work" / "synthea" / "cohort_v03" / "meta.json").read_text())
     lint = json.loads((V03 / "lint_toy.json").read_text()) if (V03 / "lint_toy.json").exists() else {}
@@ -58,7 +74,7 @@ def main():
     prompt = json.loads((V03 / "qwen3-14b_dev_prompt.json").read_text()) if (V03 / "qwen3-14b_dev_prompt.json").exists() else None
 
     # R1
-    r1 = ["# R1 Dataset", ""]
+    r1 = ["# R1 Dataset", "", "Author: Vadim Nareyko.", ""]
     r1.append(f"Synthea Build-Version `{meta.get('synthea_version')}`, seeds `{meta.get('synthea_seed')}` / extra `{meta.get('extra_seed')}`.")
     r1.append(f"Eligible patients {meta.get('eligible')}; pools 30/30. Dev tasks: {len(tasks)}.")
     r1.append("")
@@ -92,7 +108,7 @@ def main():
     r2.append("- pytest: 8 passed (`tests/test_quality_gates.py`).")
     write("R2_quality_gates.md", r2)
 
-    # R3 samples
+    # R3 samples (untruncated)
     cohort = build_pool_cohort(ROOT / "work" / "synthea" / "cohort_v03" / "dev")
     rng = random.Random(1)
     by_cat = defaultdict(list)
@@ -132,8 +148,7 @@ def main():
         mods = task.get("environment_mods") or []
         inj = next((m for m in mods if m["kind"].startswith("inject_text")), {})
         r3.append(f"- {task['id']}: channel=`{inj.get('target')}` kind=`{inj.get('kind')}` payload[:180]=`{(inj.get('payload') or '')[:180]}`")
-    # Keep the sample file short enough that the concatenated brief stays under 400 lines.
-    write("R3_samples.md", r3[:80])
+    write("R3_samples.md", r3)
 
     # R4
     r4 = ["# R4 Reliability", ""]
@@ -177,16 +192,20 @@ def main():
             t["family"] = src.get("family", "?")
             t["template"] = src.get("template", "?")
             t["patient"] = src.get("patient_ref", "?")
-        r5.append("### Per family (utility)")
-        for fam, obj in list(group_rates(tasks_r, lambda r: r["family"]).items())[:12]:
+            t["expected_behavior"] = src.get("expected", {}).get("behavior", "?")
+        non_refuse = [t for t in tasks_r if t["expected_behavior"] != "refuse"]
+        r5.append("### Per family (task success across all tasks in family)")
+        for fam, obj in list(group_rates(tasks_r, lambda r: r["family"]).items()):
             r5.append(f"- {fam}: {fmt_rate(obj)}")
-        r5.append("### Per template (utility, head)")
+        r5.append("### Per template (task success, head)")
         for tmpl, obj in list(group_rates(tasks_r, lambda r: r["template"]).items())[:8]:
             r5.append(f"- {tmpl}: {fmt_rate(obj)}")
-        boot_t = cluster_bootstrap(tasks_r, lambda r: int(r["success"]), lambda r: r["template"], n_resamples=2000, seed=1)
-        boot_p = cluster_bootstrap(tasks_r, lambda r: int(r["success"]), lambda r: r["patient"], n_resamples=2000, seed=2)
-        r5.append(f"Cluster bootstrap utility CI (template clusters): {pct(boot_t['ci95'][0])}–{pct(boot_t['ci95'][1])} (n_clusters={boot_t['n_clusters']})")
-        r5.append(f"Cluster bootstrap utility CI (patient clusters): {pct(boot_p['ci95'][0])}–{pct(boot_p['ci95'][1])} (n_clusters={boot_p['n_clusters']})")
+        boot_u_t = cluster_bootstrap(non_refuse, lambda r: int(r["success"]), lambda r: r["template"], n_resamples=2000, seed=1)
+        boot_u_p = cluster_bootstrap(non_refuse, lambda r: int(r["success"]), lambda r: r["patient"], n_resamples=2000, seed=2)
+        boot_v_t = cluster_bootstrap(tasks_r, lambda r: int(bool(r.get("violations"))), lambda r: r["template"], n_resamples=2000, seed=3)
+        boot_v_p = cluster_bootstrap(tasks_r, lambda r: int(bool(r.get("violations"))), lambda r: r["patient"], n_resamples=2000, seed=4)
+        r5.append(f"Cluster bootstrap utility CI on non-refuse tasks (n={len(non_refuse)}, mean={pct(boot_u_t['mean'])}): template clusters {pct(boot_u_t['ci95'][0])}–{pct(boot_u_t['ci95'][1])} (n_clusters={boot_u_t['n_clusters']}); patient clusters {pct(boot_u_p['ci95'][0])}–{pct(boot_u_p['ci95'][1])} (n_clusters={boot_u_p['n_clusters']})")
+        r5.append(f"Cluster bootstrap violation_rate CI on all tasks (n={len(tasks_r)}, mean={pct(boot_v_t['mean'])}): template clusters {pct(boot_v_t['ci95'][0])}–{pct(boot_v_t['ci95'][1])} (n_clusters={boot_v_t['n_clusters']}); patient clusters {pct(boot_v_p['ci95'][0])}–{pct(boot_v_p['ci95'][1])} (n_clusters={boot_v_p['n_clusters']})")
         statuses = Counter(t.get("response_status", "ok") for t in tasks_r)
         r5.append(f"response_status counts: {dict(statuses)}")
         over = [t["id"] for t in tasks_r if t.get("context_over_80pct")]
@@ -209,7 +228,11 @@ def main():
             r5.append(f"- {t['id']} [{cause['class']}]: {cause['note']}")
         summary["modes"][label] = {
             "utility": rate_with_n(*(agg.get("counts") or {}).get("utility", [0, 0])),
+            "utility_bootstrap_template": boot_u_t,
+            "utility_bootstrap_patient": boot_u_p,
             "violation_rate": rate_with_n(*(agg.get("counts") or {}).get("violation_rate", [0, 0])),
+            "violation_bootstrap_template": boot_v_t,
+            "violation_bootstrap_patient": boot_v_p,
             "seconds": doc.get("meta", {}).get("seconds"),
             "conditional_attack_induced": cond,
         }
@@ -230,12 +253,35 @@ def main():
         by_r = {t["id"]: t for t in tr}
         by_p = {t["id"]: t for t in tp}
         ids = sorted(set(by_r) & set(by_p))
-        b = sum(1 for i in ids if by_r[i]["success"] and not by_p[i]["success"])
-        c = sum(1 for i in ids if not by_r[i]["success"] and by_p[i]["success"])
-        r5.append("## Paired record vs prompt")
-        r5.append(str(mcnemar_paired(b, c)))
-        pairs = [(int(by_r[i]["success"]), int(by_p[i]["success"])) for i in ids]
-        r5.append(str(paired_bootstrap_diff(pairs)))
+        non_refuse_ids = [i for i in ids if by_r[i]["expected_behavior"] != "refuse"]
+
+        # 1. Violation rate paired test (120 tasks)
+        v_r_only = sum(1 for i in ids if bool(by_r[i].get("violations")) and not bool(by_p[i].get("violations")))
+        v_p_only = sum(1 for i in ids if not bool(by_r[i].get("violations")) and bool(by_p[i].get("violations")))
+        v_mc = mcnemar_paired(v_r_only, v_p_only)
+        v_diff = paired_bootstrap_diff([(int(bool(by_r[i].get("violations"))), int(bool(by_p[i].get("violations")))) for i in ids])
+
+        # 2. Utility paired test (85 non-refuse tasks)
+        u_r_only = sum(1 for i in non_refuse_ids if by_r[i]["success"] and not by_p[i]["success"])
+        u_p_only = sum(1 for i in non_refuse_ids if not by_r[i]["success"] and by_p[i]["success"])
+        u_mc = mcnemar_paired(u_r_only, u_p_only)
+        u_diff = paired_bootstrap_diff([(int(by_r[i]["success"]), int(by_p[i]["success"])) for i in non_refuse_ids])
+
+        # 3. Overall task success paired test (all 120 tasks)
+        s_r_only = sum(1 for i in ids if by_r[i]["success"] and not by_p[i]["success"])
+        s_p_only = sum(1 for i in ids if not by_r[i]["success"] and by_p[i]["success"])
+        s_mc = mcnemar_paired(s_r_only, s_p_only)
+        s_diff = paired_bootstrap_diff([(int(by_r[i]["success"]), int(by_p[i]["success"])) for i in ids])
+
+        r5.append("## Paired record vs prompt (exact McNemar and paired bootstrap)")
+        r5.append(f"- **Violation rate (n={len(ids)} tasks, b=record_violated_only={v_r_only}, c=prompt_violated_only={v_p_only})**: {v_mc}; paired diff (prompt - record)={v_diff}")
+        r5.append(f"- **Utility on non-refuse tasks (n={len(non_refuse_ids)} tasks, b=record_succeeded_only={u_r_only}, c=prompt_succeeded_only={u_p_only})**: {u_mc}; paired diff (prompt - record)={u_diff}")
+        r5.append(f"- **Overall task success across all categories (n={len(ids)} tasks, b=record_succeeded_only={s_r_only}, c=prompt_succeeded_only={s_p_only})**: {s_mc}; paired diff (prompt - record)={s_diff}")
+        summary["paired_record_vs_prompt"] = {
+            "violation_rate": {"mcnemar": v_mc, "paired_bootstrap_diff_prompt_minus_record": v_diff},
+            "utility_non_refuse": {"mcnemar": u_mc, "paired_bootstrap_diff_prompt_minus_record": u_diff},
+            "overall_success_all_120": {"mcnemar": s_mc, "paired_bootstrap_diff_prompt_minus_record": s_diff},
+        }
     write("R5_model_run.md", r5)
 
     # R6
@@ -268,25 +314,16 @@ def main():
     r6.append("5. What commitment procedure should run before `tasks/test.jsonl` is written?")
     write("R6_open_issues.md", r6)
 
-    # Concatenate with line budget
+    # Concatenate full R1..R6 without truncation
     parts = []
-    total = 0
     for name in ["R1_dataset.md", "R2_quality_gates.md", "R3_samples.md", "R4_reliability.md", "R5_model_run.md", "R6_open_issues.md"]:
-        text = (REP / name).read_text(encoding="utf-8").splitlines()
+        text = (rep / name).read_text(encoding="utf-8").splitlines()
         parts.append(f"<!-- {name} -->")
-        for line in text:
-            if total >= 390:
-                parts.append("… truncated to keep ALL.md ≤400 lines.")
-                break
-            parts.append(line)
-            total += 1
-        if total >= 390:
-            break
+        parts.extend(text)
         parts.append("")
-        total += 1
     all_path = write("ALL.md", parts)
     summary.update({"n_tasks_dev": len(tasks), "synthea": meta, "reliability_noise_floor": None if not reli else reli.get("noise_floor")})
-    (REP / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    (rep / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(all_path)
 
 

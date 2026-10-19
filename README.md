@@ -15,16 +15,21 @@ policies, not a test of legal compliance (GDPR, HIPAA, EHDS). See CHANGELOG.md.
 
 ## Layout
 
-    schema/task.schema.json   task format
-    tasks/examples_dev.json   10 example tasks (2 allowed, 3 denied, 3 boundary, 2 adversarial)
-    wardbench/cohort.py       toy FHIR-shaped cohort, augmentation, attribute extraction
+    schema/task.schema.json   task format (v0.3)
+    tasks/examples_dev.json   10-task starter harness
+    tasks/dev.jsonl           120 development tasks (30 per category, 44 templates, 30 patients)
+    templates/                hand-written YAML task templates
+    cohort/dev_manifest.json  Synthea provenance for the 30 development-pool patients
+    wardbench/cohort.py       toy + Synthea cohort loading, augmentation, attribute extraction
     wardbench/resolve.py      {{pt.*}} placeholders -> regexes
     wardbench/world.py        in-memory permissive FHIR world: consent, injections, tools, call log
     wardbench/grade.py        deterministic grader and metrics
-    wardbench/agents.py       scripted baselines + Anthropic tool-use agent
-    scripts/validate.py       schema + sanity checks
-    scripts/run.py            run agents, print metrics
-    results/                  baseline outputs
+    wardbench/agents.py       scripted baselines + OpenAI-compatible and Anthropic tool-use agents
+    wardbench/stats.py        Wilson intervals, cluster bootstrap, McNemar, paired bootstrap
+    review/                   clinician / DPO review packet (policy matrix, instructions, 60-task sheet)
+    scripts/                  validation, linting, baseline, reliability, and model runners
+    tests/                    automated quality gates
+    results/                  archived v0.1, v0.2, and v0.3 run outputs
 
 ## Quick start
 
@@ -51,13 +56,9 @@ Baselines on the 10 example tasks (toy cohort, seed 7):
 These numbers validate the harness, not any model. `oracle` does not test policy reasoning.
 
 Not done yet:
-- `AnthropicAgent` is written and its loop is smoke-tested with a stub client, but has not been run
-  against the real API (no key was available when it was written). Expect to fix small things.
-- The toy cohort is generated in Python. For the real benchmark, generate patients with Synthea
-  and feed them through `augment()` and `derive_attrs()`, which work on plain FHIR resources. The mock
-  stores note text unencoded; real FHIR uses base64 in `attachment.data`.
-- Only 10 tasks; clinician review of policies and tasks has not happened.
-- No multiple seeds, no held-out split commitment script, no `enforced` server mode.
+- Clinician / DPO review of the policy table and the 60-task review sheet (`review/`).
+- Validity audit (v0.4), capability-control allowed twins for denied tasks, and evaluation across multiple models.
+- Held-out `test` split commitment (Merkle root) and `enforced` server control mode.
 - `false_refusal_proxy` is a proxy (missing content with no violation), not a refusal classifier.
 
 ## Agent tools
@@ -93,10 +94,10 @@ Break-glass access is out of scope.
   answer count. Restricted resources carry `meta.security` labels (e.g. `PSY`) so a
   careful agent can filter them.
 - `forbidden_answer_patterns` and `required_answer_patterns` are regexes. Placeholders
-  like `{{pt.hba1c.latest.value}}` are resolved by the cohort builder from the real
-  generated data before grading. `scripts/validate.py` lists all placeholders in use.
-- The cohort builder (not written yet) must augment Synthea patients so each task's
-  patient has the needed attributes (a mental-health condition, an HbA1c, a note, ...).
+  like `{{pt.hba1c.latest.value}}` are resolved from the cohort data before grading.
+  `scripts/validate.py` lists all placeholders in use.
+- `wardbench/cohort.py` augments Synthea patients deterministically so each task's
+  patient has the needed attributes (a mental-health condition, HbA1c series, progress notes, medication order).
 
 ## Metrics
 

@@ -6,9 +6,13 @@
 *.pem
 
 # Local only
+.cloudflare
 .cloudflare/
+.cursor
 .cursor/
+work
 work/
+output
 output/
 
 # Test pool must stay unpublished until the held-out release
@@ -24,7 +28,9 @@ __pycache__/
 .eggs/
 build/
 dist/
+.venv
 .venv/
+venv
 venv/
 .pytest_cache/
 .mypy_cache/
