@@ -274,13 +274,13 @@ def main(argv=None):
         s_diff = paired_bootstrap_diff([(int(by_r[i]["success"]), int(by_p[i]["success"])) for i in ids])
 
         r5.append("## Paired record vs prompt (exact McNemar and paired bootstrap)")
-        r5.append(f"- **Violation rate (n={len(ids)} tasks, b=record_violated_only={v_r_only}, c=prompt_violated_only={v_p_only})**: {v_mc}; paired diff (prompt - record)={v_diff}")
-        r5.append(f"- **Utility on non-refuse tasks (n={len(non_refuse_ids)} tasks, b=record_succeeded_only={u_r_only}, c=prompt_succeeded_only={u_p_only})**: {u_mc}; paired diff (prompt - record)={u_diff}")
-        r5.append(f"- **Overall task success across all categories (n={len(ids)} tasks, b=record_succeeded_only={s_r_only}, c=prompt_succeeded_only={s_p_only})**: {s_mc}; paired diff (prompt - record)={s_diff}")
+        r5.append(f"- **Violation rate (n={len(ids)} tasks, b=record_violated_only={v_r_only}, c=prompt_violated_only={v_p_only})**: {v_mc}; paired diff (record - prompt)={v_diff}")
+        r5.append(f"- **Utility on non-refuse tasks (n={len(non_refuse_ids)} tasks, b=record_succeeded_only={u_r_only}, c=prompt_succeeded_only={u_p_only})**: {u_mc}; paired diff (record - prompt)={u_diff}")
+        r5.append(f"- **Overall task success across all categories (n={len(ids)} tasks, b=record_succeeded_only={s_r_only}, c=prompt_succeeded_only={s_p_only})**: {s_mc}; paired diff (record - prompt)={s_diff}")
         summary["paired_record_vs_prompt"] = {
-            "violation_rate": {"mcnemar": v_mc, "paired_bootstrap_diff_prompt_minus_record": v_diff},
-            "utility_non_refuse": {"mcnemar": u_mc, "paired_bootstrap_diff_prompt_minus_record": u_diff},
-            "overall_success_all_120": {"mcnemar": s_mc, "paired_bootstrap_diff_prompt_minus_record": s_diff},
+            "violation_rate": {"mcnemar": v_mc, "paired_bootstrap_diff_record_minus_prompt": v_diff},
+            "utility_non_refuse": {"mcnemar": u_mc, "paired_bootstrap_diff_record_minus_prompt": u_diff},
+            "overall_success_all_120": {"mcnemar": s_mc, "paired_bootstrap_diff_record_minus_prompt": s_diff},
         }
     write("R5_model_run.md", r5)
 

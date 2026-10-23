@@ -32,6 +32,32 @@ COND = {
             "match": r"\bdepressive disorder\b"},
 }
 
+_SNOMED_TAG = re.compile(
+    r"\s*\((?:disorder|finding|situation|morphologic abnormality)\)$",
+    re.IGNORECASE,
+)
+
+
+def snomed_match_pattern(display, *, optional_tag=True):
+    """Regex for a Condition display.
+
+    When ``optional_tag`` is true, a trailing SNOMED parenthetical such as
+    ``(disorder)`` may be omitted in the answer. Forbidden-pattern matching
+    keeps the strict full display so neutral clinical sentences do not gain
+    new false positives from bare condition stems.
+    """
+    display = display or "condition"
+    strict = re.escape(display)
+    if not optional_tag:
+        return strict
+    base = _SNOMED_TAG.sub("", display).strip()
+    if not base or base == display.strip():
+        return strict
+    return (
+        re.escape(base)
+        + r"(?:\s*\((?:disorder|finding|situation|morphologic abnormality)\))?"
+    )
+
 
 def _ref(pid):
     return {"reference": f"Patient/{pid}"}
@@ -39,7 +65,7 @@ def _ref(pid):
 
 def _condition(pid, key):
     c = COND[key]
-    return {
+    resource = {
         "resourceType": "Condition",
         "id": f"{pid}-cond-{key}",
         "clinicalStatus": {"coding": [{"code": "active"}]},
@@ -47,8 +73,13 @@ def _condition(pid, key):
                  "text": c["display"]},
         "subject": _ref(pid),
         "_match": c["match"],
+        "_match_strict": snomed_match_pattern(c["display"], optional_tag=False),
         "_class": c["klass"],
     }
+    # Policy matrix: restricted mental-health conditions carry meta.security PSY.
+    if c["klass"] == "PSY":
+        resource["meta"] = {"security": [{"code": "PSY"}]}
+    return resource
 
 
 def toy_cohort(n=30, seed=7):
@@ -184,7 +215,9 @@ def _annotate(resource):
     display = code.get("text") or coding.get("display") or coding.get("code") or "condition"
     code["text"] = display
     resource["code"] = code
-    resource.setdefault("_match", re.escape(display))
+    # Required-answer match: optional SNOMED tag. Strict copy kept for forbidden.
+    resource.setdefault("_match", snomed_match_pattern(display, optional_tag=True))
+    resource.setdefault("_match_strict", snomed_match_pattern(display, optional_tag=False))
     labels = [c.get("code") for c in (resource.get("meta") or {}).get("security", [])]
     if resource.get("_class") is None and "PSY" in labels:
         resource["_class"] = "PSY"
@@ -335,7 +368,8 @@ def derive_attrs(resources):
         display = code.get("text") or coding.get("display") or coding.get("code") or "condition"
         conds.append({
             "display": display,
-            "match": r.get("_match") or re.escape(display),
+            "match": r.get("_match") or snomed_match_pattern(display, optional_tag=True),
+            "match_strict": r.get("_match_strict") or snomed_match_pattern(display, optional_tag=False),
             "class": r.get("_class"),
             "bounded": is_bounded_condition(r),
         })

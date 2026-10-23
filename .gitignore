@@ -8,8 +8,6 @@
 # Local only
 .cloudflare
 .cloudflare/
-.cursor
-.cursor/
 work
 work/
 output
@@ -38,7 +36,5 @@ venv/
 .coverage
 htmlcov/
 
-# Editors and OS
-.idea/
-.vscode/
+# OS
 .DS_Store

@@ -50,6 +50,25 @@ def load_dev_patients(manifest_path: pathlib.Path, test_manifest: pathlib.Path |
     return patients, test_ids
 
 
+def load_test_patients(test_manifest: pathlib.Path, dev_manifest: pathlib.Path | None):
+    """Patient ids for the held-out split; refuses source_id overlap with dev."""
+    if not test_manifest.exists():
+        raise FileNotFoundError(f"test manifest missing: {test_manifest}")
+    test = json.loads(test_manifest.read_text(encoding="utf-8"))
+    patients = [p["pid"] for p in test["patients"]]
+    if not patients:
+        raise RuntimeError(f"test manifest has no patients: {test_manifest}")
+    if dev_manifest and dev_manifest.exists():
+        dev = json.loads(dev_manifest.read_text(encoding="utf-8"))
+        dev_ids = {p["source_id"] for p in dev["patients"]}
+        for p in test["patients"]:
+            if p["source_id"] in dev_ids:
+                raise RuntimeError(
+                    f"test patient {p['pid']} shares source_id with dev pool"
+                )
+    return patients
+
+
 def _variants_for_split(split: str):
     return (1, 2, 3) if split == "dev" else (4, 5)
 
@@ -111,14 +130,18 @@ def generate(split: str, seed: int, template_dir: pathlib.Path, manifest: pathli
              target_per_category: int = 30):
     rng = random.Random(seed)
     templates = load_templates(template_dir)
-    patients, _ = load_dev_patients(manifest, test_manifest if split == "dev" else None)
-    if split != "dev":
-        raise NotImplementedError("test split generation is reserved; variants 4-5 only")
+    if split == "dev":
+        patients, _ = load_dev_patients(manifest, test_manifest)
+    elif split == "test":
+        patients = load_test_patients(test_manifest, manifest)
+    else:
+        raise ValueError(f"unknown split {split!r}")
 
     base_tmpls = [t for t in templates if t["category"] != "adversarial"]
     adv_tmpls = [t for t in templates if t["category"] == "adversarial"]
     by_id = {t["id"]: t for t in templates}
     variants = _variants_for_split(split)
+    silent_base_variant = variants[0]
 
     # Schedule non-adversarial first: round-robin templates × variants, assign patients.
     slots = []
@@ -201,7 +224,9 @@ def generate(split: str, seed: int, template_dir: pathlib.Path, manifest: pathli
                 continue
             # Create a silent base task first so control twin is well-defined.
             base_tid = _next_id(counters, base_tmpl["category"])
-            base_task = _task_from_template(base_tmpl, patient, 1, split, base_tid)
+            base_task = _task_from_template(
+                base_tmpl, patient, silent_base_variant, split, base_tid
+            )
             tasks.append(base_task)
             patient_counts[patient] += 1
             patient_templates[patient].add(base_tmpl["id"])
@@ -257,6 +282,20 @@ def generate(split: str, seed: int, template_dir: pathlib.Path, manifest: pathli
         if base_tmpl["category"] == "denied":
             denied_adv += 1
 
+    # Drop surplus non-adversarial tasks created as silent bases for attacks,
+    # without removing any task that an adversarial row references.
+    protected = {t.get("base_task_id") for t in tasks if t.get("base_task_id")}
+    for category in ("allowed", "denied", "boundary"):
+        while sum(1 for t in tasks if t["category"] == category) > target_per_category:
+            candidates = [
+                t for t in tasks
+                if t["category"] == category and t["id"] not in protected
+            ]
+            if not candidates:
+                break
+            drop = max(candidates, key=lambda t: t["id"])
+            tasks.remove(drop)
+
     # Stable order by id
     tasks.sort(key=lambda t: t["id"])
     return tasks
@@ -281,11 +320,17 @@ def main(argv=None):
     ap.add_argument("--templates", default=str(ROOT / "templates"))
     ap.add_argument("--manifest", default=str(ROOT / "cohort" / "dev_manifest.json"))
     ap.add_argument("--test-manifest", default=str(_default_test_manifest()))
-    ap.add_argument("--out", default=str(ROOT / "tasks" / "dev.jsonl"))
+    ap.add_argument(
+        "--out",
+        default="",
+        help="default: tasks/dev.jsonl or tasks/test.jsonl matching --split",
+    )
     args = ap.parse_args(argv)
     tasks = generate(args.split, args.seed, pathlib.Path(args.templates),
                      pathlib.Path(args.manifest), pathlib.Path(args.test_manifest))
-    out = pathlib.Path(args.out)
+    out = pathlib.Path(args.out) if args.out else (
+        ROOT / "tasks" / ("test.jsonl" if args.split == "test" else "dev.jsonl")
+    )
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", encoding="utf-8") as fh:
         for task in tasks:

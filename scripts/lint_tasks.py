@@ -76,7 +76,10 @@ def _resolved(task, attrs):
     exp = task["expected"]
     return {
         "required": [p for pat in exp.get("required_answer_patterns", []) for p in resolve(pat, attrs)],
-        "forbidden": [p for pat in exp.get("forbidden_answer_patterns", []) for p in resolve(pat, attrs)],
+        "forbidden": [
+            p for pat in exp.get("forbidden_answer_patterns", [])
+            for p in resolve(pat, attrs, strict=True)
+        ],
     }
 
 
@@ -95,11 +98,18 @@ def gate_null_and_leaky(tasks, cohort):
                 if task["expected"].get("required_answer_patterns"):
                     errors.append(f"[{task['id']}] neutral answer satisfied required patterns: {ans!r}")
         if resolved["forbidden"]:
-            leaky = " ".join(human for _, human in resolved["forbidden"])
+            # Deduplicate by human string: expanders like conditions.any can
+            # emit the same display twice; the grader records one disclosed:* hit.
+            humans = list(dict.fromkeys(human for _, human in resolved["forbidden"]))
+            leaky = " ".join(humans)
             res = grade(task, world, leaky, resolved)
-            disclosed = [v for v in res["violations"] if v.startswith("disclosed:")]
-            if len(disclosed) < len(resolved["forbidden"]):
-                errors.append(f"[{task['id']}] leaky answer missed some forbidden patterns ({len(disclosed)}/{len(resolved['forbidden'])})")
+            disclosed = {v.split(":", 1)[1] for v in res["violations"] if v.startswith("disclosed:")}
+            missing = [h for h in humans if h not in disclosed]
+            if missing:
+                errors.append(
+                    f"[{task['id']}] leaky answer missed some forbidden patterns "
+                    f"({len(humans) - len(missing)}/{len(humans)}; e.g. {missing[0]!r})"
+                )
     return errors
 
 
@@ -129,20 +139,43 @@ def coverage_matrix(tasks):
     return cells
 
 
+def _resolve_cohort(name: str):
+    if name == "toy":
+        return build_cohort(30)
+    if name == "dev_pool":
+        return build_pool_cohort(ROOT / "work" / "synthea" / "cohort_v03" / "dev")
+    if name == "test_pool":
+        candidates = [
+            ROOT.parent.parent / "tracks" / "wardbench" / "heldout" / "test_pool",
+            ROOT / "cohort" / "test",
+        ]
+        for path in candidates:
+            if path.is_dir() and any(path.glob("*.json")):
+                return build_pool_cohort(path)
+        raise SystemExit(
+            "test_pool not found under tracks/wardbench/heldout/test_pool or cohort/test"
+        )
+    path = pathlib.Path(name)
+    if path.is_dir():
+        return build_pool_cohort(path)
+    raise SystemExit(f"unknown cohort {name!r}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("tasks", nargs="+")
-    ap.add_argument("--cohort", default="toy", choices=["toy", "dev_pool"])
+    ap.add_argument(
+        "--cohort",
+        default="toy",
+        help="toy | dev_pool | test_pool | path to a pool directory",
+    )
     ap.add_argument("--json-out", default=None)
     args = ap.parse_args()
     schema = json.loads((ROOT / "schema" / "task.schema.json").read_text(encoding="utf-8"))
     tasks = []
     for path in args.tasks:
         tasks.extend(load_tasks(pathlib.Path(path)))
-    if args.cohort == "toy":
-        cohort = build_cohort(30)
-    else:
-        cohort = build_pool_cohort(ROOT / "work" / "synthea" / "cohort_v03" / "dev")
+    cohort = _resolve_cohort(args.cohort)
 
     report = {"gates": {}, "false_positives": [], "coverage_empty": [], "trivial_naive": []}
     e = gate_schema(tasks, schema)

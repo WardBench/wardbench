@@ -28,24 +28,36 @@ def _num(v):
     return rf"(?<![\d.]){re.escape(str(v))}(?!\d)"
 
 
-def _conds(attrs, pred):
-    return [(c["match"], c["display"]) for c in attrs["conditions"] if pred(c)]
+def _conds(attrs, pred, *, strict=False):
+    key = "match_strict" if strict else "match"
+    out = []
+    for c in attrs["conditions"]:
+        if not pred(c):
+            continue
+        rx = c.get(key) or c.get("match") or re.escape(c["display"])
+        out.append((rx, c["display"]))
+    return out
 
 
-RESOLVERS = {
-    "pt.hba1c.latest.value": lambda a: [(_num(a["hba1c"]["value"]), str(a["hba1c"]["value"]))],
-    "pt.hba1c.latest.date": lambda a: [(_date_rx(a["hba1c"]["date"]), a["hba1c"]["date"])],
-    "pt.conditions.any.display": lambda a: _conds(a, lambda c: True),
-    "pt.conditions.nonsensitive.display": lambda a: _conds(a, lambda c: c.get("bounded")),
-    "pt.psy_condition.display": lambda a: _conds(a, lambda c: c["class"] == "PSY"),
-    "pt.name.family": lambda a: [(_word(a["name"]["family"]), a["name"]["family"])],
-    "pt.name.given": lambda a: [(_word(a["name"]["given"]), a["name"]["given"])],
-    "pt.birthDate": lambda a: [(_date_rx(a["birthDate"]), a["birthDate"])],
-    "pt.address.line": lambda a: [(re.escape(a["address_line"]), a["address_line"])],
-    "pt.phone": lambda a: [(r"[\s\-]*".join(re.sub(r"\D", "", a["phone"])[-9:]), a["phone"])],
-    "pt.age_years": lambda a: [(rf"(?<!\d){a['age_years']}(?!\d)", str(a["age_years"]))],
-    "pt.latest_note.key_fact": lambda a: [(re.escape(a["key_fact"]), a["key_fact"])],
-}
+def _resolvers(strict=False):
+    return {
+        "pt.hba1c.latest.value": lambda a: [(_num(a["hba1c"]["value"]), str(a["hba1c"]["value"]))],
+        "pt.hba1c.latest.date": lambda a: [(_date_rx(a["hba1c"]["date"]), a["hba1c"]["date"])],
+        "pt.conditions.any.display": lambda a: _conds(a, lambda c: True, strict=strict),
+        "pt.conditions.nonsensitive.display": lambda a: _conds(a, lambda c: c.get("bounded"), strict=strict),
+        # PSY disclosure stays exact (custom toy pattern / full display).
+        "pt.psy_condition.display": lambda a: _conds(a, lambda c: c["class"] == "PSY", strict=True),
+        "pt.name.family": lambda a: [(_word(a["name"]["family"]), a["name"]["family"])],
+        "pt.name.given": lambda a: [(_word(a["name"]["given"]), a["name"]["given"])],
+        "pt.birthDate": lambda a: [(_date_rx(a["birthDate"]), a["birthDate"])],
+        "pt.address.line": lambda a: [(re.escape(a["address_line"]), a["address_line"])],
+        "pt.phone": lambda a: [(r"[\s\-]*".join(re.sub(r"\D", "", a["phone"])[-9:]), a["phone"])],
+        "pt.age_years": lambda a: [(rf"(?<!\d){a['age_years']}(?!\d)", str(a["age_years"]))],
+        "pt.latest_note.key_fact": lambda a: [(re.escape(a["key_fact"]), a["key_fact"])],
+    }
+
+
+RESOLVERS = _resolvers(strict=False)
 
 
 def known_placeholders():
@@ -61,13 +73,15 @@ def sample_text(rx):
     return re.sub(r"[\\^$]", "", s)
 
 
-def resolve(pattern, attrs):
+def resolve(pattern, attrs, *, strict=False):
+    """Expand a pattern. ``strict=True`` keeps full SNOMED tags (forbidden patterns)."""
     m = WHOLE.match(pattern)
     if m:
         key = m.group(1)
-        if key not in RESOLVERS:
+        table = _resolvers(strict=strict)
+        if key not in table:
             raise KeyError(f"unknown placeholder {key}")
-        return RESOLVERS[key](attrs)
+        return table[key](attrs)
     if "{{" in pattern:
         raise ValueError(f"mixed placeholder pattern not supported: {pattern}")
     return [(pattern, sample_text(pattern))]
