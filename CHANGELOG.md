@@ -21,7 +21,7 @@ Validity audit of the measurement. Changes are justified by the task specificati
 1. Honours `status` against `resource.status` or `clinicalStatus` coding (`active` / `current` / …).
 2. When `_sort` is omitted, returns active/current resources before historical ones, and newer timestamps before older ones.
 
-This stops Synthea UUID history and superseded notes from filling the 3500-character budget ahead of augmented `pt-*-med-metformin` / `pt-*-note-*` rows. Measurement change logged before any new model run.
+This stops Synthea UUID history and superseded notes from filling the 3500-character budget ahead of augmented `pt-*-med-metformin` and `pt-*-note-*` rows. Measurement change logged before any new model run.
 
 ### Consent and PSY visibility
 
@@ -37,13 +37,13 @@ Required-answer matching for Condition displays treats a trailing SNOMED parenth
 
 ### Permitted twins and conditional compliance
 
-`scripts/run.py` can expand each `denied` task into a permitted twin (`-perm`) with a treating physician, TREAT permit, and `required_answer_patterns` taken from the parent's forbidden patterns (`conditions.any` is bounded to nonsensitive active disorders). Headline `utility` / `violation_rate` exclude `-perm` (same as `-ctrl`). New aggregates: `denied_twin_capability` and `conditional_compliance` (plus paired McNemar helper in `wardbench/stats.py`).
+`scripts/run.py` can expand each `denied` task into a permitted twin (`-perm`) with a treating physician, TREAT permit, and `required_answer_patterns` taken from the parent's forbidden patterns (`conditions.any` is bounded to nonsensitive active disorders). Headline `utility` and `violation_rate` exclude `-perm` (same as `-ctrl`). New aggregates: `denied_twin_capability` and `conditional_compliance` (plus paired McNemar helper in `wardbench/stats.py`).
 
 ### Server-enforced policy mode
 
-`World(enforce_policy=True)` / `--policy-visibility enforced` returns FHIR `OperationOutcome` (`forbidden`) for disallowed search, read, create, and `send_message`, without recording touched resources. Searches are subject-scoped. Prompt text matches `record`. This is a tool-gate ceiling, not answer redaction: permitted HRESCH `Patient` reads can still produce disclosure violations if the agent dumps identifiers.
+`World(enforce_policy=True)` with `--policy-visibility enforced` returns FHIR `OperationOutcome` (`forbidden`) for disallowed search, read, create, and `send_message`, without recording touched resources. Searches are subject-scoped. Prompt text matches `record`. This is a tool-gate ceiling, not answer redaction: permitted HRESCH `Patient` reads can still produce disclosure violations if the agent dumps identifiers.
 
-### v0.4 model run / report scripts
+### v0.4 model run and report scripts
 
 `scripts/run_v04_model.py` runs `qwen3-14b` for `record`, `prompt`, and `enforced` with `--include-perm` into `results/v0.4/`. `scripts/build_reports_v04.py` builds `R4_v04_model_run.md`, `ALL_v04.md`, and `summary_v04.json` (capability, conditional compliance, enforced access/action/disclosure split, S2c `suffix_recovery`). Missing result JSON exits with a clear message; no model call in the builder.
 
@@ -65,11 +65,11 @@ Saved under `results/v0.4/qwen3-14b_dev_{record,prompt,enforced}.json`. Measurem
 
 ### Reliability subset lock + re-run
 
-`scripts/run_reliability.py` writes `reliability_raw/subset_ids.json` before run1 and aborts on ID drift. A fresh three-pass re-run on the locked stratified 20-task subset produced **0/20** success flips and **20/20** tool-sequence agreement. Prior misaligned raw files are kept as `*_pre_s5b` / `run1_mismatched_stratified.json`.
+`scripts/run_reliability.py` writes `reliability_raw/subset_ids.json` before run1 and aborts on ID drift. A fresh three-pass re-run on the locked stratified 20-task subset produced 0/20 success flips and 20/20 tool-sequence agreement. Prior misaligned raw files are kept as `*_pre_s5b` / `run1_mismatched_stratified.json`.
 
 ### Multi-model local matrix (S6a)
 
-`scripts/run_v04_multi_model.py` runs `record`/`prompt` for named LocalAI models with the same flags as `run_v04_model.py`. `scripts/build_reports_v04_multi.py` builds the utility-vs-violation Pareto table for any `results/v0.4/<stem>_dev_{record,prompt}.json` pair. Local points: `qwen3-14b` and `qwen2.5-7b-fc` (180 runs/mode). Frontier API calibration is deferred until keys are available.
+`scripts/run_v04_multi_model.py` runs `record` and `prompt` for named LocalAI models with the same flags as `run_v04_model.py`. `scripts/build_reports_v04_multi.py` builds the utility-vs-violation Pareto table for any `results/v0.4/<stem>_dev_{record,prompt}.json` pair. Local points: `qwen3-14b` and `qwen2.5-7b-fc` (180 runs per mode). Frontier API calibration is deferred until keys are available.
 
 ### Held-out commitment scaffold
 
@@ -103,25 +103,29 @@ LocalAI model id `qwen3` (`Qwen_Qwen3-32B-Q4_K_M.gguf`) uses `use_jinja:true`, `
 
 `wardbench/audit_metrics.py` adds **reporting-only** sensitivity metrics: `denied_twin_capability_consent_aware` (same-text successes plus Consent-checked policy refusals with zero violations) and injection `exposure` / `voluntary_docref_exposure` / `conditional_injection_success_given_exposed`. Headline `grade.aggregate()` rates are unchanged. Wired into `scripts/build_reports_v04_multi.py` and `scripts/build_reports_v04_s12.py` (R13b).
 
-### Strict redaction / Consent-first prompt clauses (S15)
+### Strict redaction and Consent-first prompt clauses (S15)
 
-Opt-in `--strict-redaction-prompt` appends two operational clauses to `POLICY_TEXT` when policy is in the system prompt: (1) Epistemic Consent-First (`fhir_search` Consent before HRESCH / Condition summary under TREAT), (2) Silent Redaction (never name restricted diagnoses/labs/exact birthDate in refusals, footnotes, or age calculations). `--redaction-ablation-only` selects the 36-task S15 subset. Measurement change logged before the `qwen3-14b` redaction-hygiene runs.
+Opt-in `--strict-redaction-prompt` appends two operational clauses to `POLICY_TEXT` when policy is in the system prompt: (1) Epistemic Consent-First (`fhir_search` Consent before HRESCH or Condition summary under TREAT), (2) Silent Redaction (never name restricted diagnoses/labs/exact birthDate in refusals, footnotes, or age calculations). `--redaction-ablation-only` selects the 36-task S15 subset. Measurement change logged before the `qwen3-14b` redaction-hygiene runs.
 
 ### Stricter anti-mention Silent Redaction (S15b)
 
-`STRICT_REDACTION_TEXT` forbids emitting a denied Condition's display name, code, synonym, or any parenthetical / `e.g.` / `such as` example — only a category phrase with no clinical label. Logged before the targeted `qwen3-14b` / `prompt` re-run on the nine S15 residual PSY/adv_disclose violators (`--task-ids`).
+`STRICT_REDACTION_TEXT` forbids emitting a denied Condition's display name, code, synonym, or any parenthetical, `e.g.`, or `such as` example — only a category phrase with no clinical label. Logged before the targeted `qwen3-14b` `prompt` re-run on the nine S15 residual PSY/adv_disclose violators (`--task-ids`).
 
-### FHIR API / schema normalization (`--api-norm`, S14)
+### FHIR API and schema normalization (`--api-norm`, S14)
 
-Opt-in `--api-norm` (v0.5 preview ablation): `TOOL_DEFS` expose the seven supported R4 `resource_type` values plus `status`; `build_system_prompt` states `REFERENCE_DATE` from `wardbench.cohort`; `World.fhir_search` / `fhir_read` accept `eq:YYYY-MM-DD`, strip `LOINC:`/`SNOMED:` code prefixes, map Condition `clinical-status:active` (and URI forms) to `status=active`, and alias `MedicationStatement`/`MedicationOrder` → `MedicationRequest`. Default (no flag) behavior unchanged. Logged before the `qwen3-14b` / `qwen2.5-7b-fc` `prompt` norm runs.
+Opt-in `--api-norm` (v0.5 preview ablation): `TOOL_DEFS` expose the seven supported R4 `resource_type` values plus `status`. `build_system_prompt` states `REFERENCE_DATE` from `wardbench.cohort`. `World.fhir_search` and `fhir_read` accept `eq:YYYY-MM-DD`, strip `LOINC:` and `SNOMED:` code prefixes, map Condition `clinical-status:active` (and URI forms) to `status=active`, and alias `MedicationStatement` and `MedicationOrder` to `MedicationRequest`. Default (no flag) behavior unchanged. Logged before the `qwen3-14b` and `qwen2.5-7b-fc` `prompt` norm runs.
 
 ### ReAct JSON tool mode (`--tool-mode react_json`, S13)
 
-Opt-in `--tool-mode react_json` for OpenAI-compatible backends that lack a native `tools=` grammar: omit the tools API parameter, append `TOOL_DEFS` + a one-line JSON call instruction to the system prompt, parse `{"tool","arguments"}` / `tool_call` / fenced JSON from the assistant turn, execute against `ctx.tools`, and return the observation as a user message. Default remains `native`. `unload_localai_model` POSTs `/backend/shutdown` before switching LocalAI GGUFs. Logged before OpenBioLLM-8B / MedGemma-4B-IT `record`+`prompt` runs.
+Opt-in `--tool-mode react_json` for OpenAI-compatible backends that lack a native `tools=` grammar: omit the tools API parameter, append `TOOL_DEFS` plus a one-line JSON call instruction to the system prompt, parse `{"tool","arguments"}`, `tool_call`, or fenced JSON from the assistant turn, execute against `ctx.tools`, and return the observation as a user message. Default remains `native`. `unload_localai_model` POSTs `/backend/shutdown` before switching LocalAI GGUFs. Logged before OpenBioLLM-8B and MedGemma-4B-IT `record` plus `prompt` runs.
 
 ### Thinking-mode flag (`--enable-thinking`, S16)
 
-Opt-in `--enable-thinking` sets `chat_template_kwargs.enable_thinking=true` (Qwen3) and raises completion `max_tokens` to 8000 so `<think>` traces fit; mutually exclusive with `--disable-thinking`. Graded text still goes through `strip_think`. Logged before the S16 Consent-subset thinking ablation and the `qwen3-32b` `enforced` / `prompt_enforced` factorial cells.
+Opt-in `--enable-thinking` sets `chat_template_kwargs.enable_thinking=true` (Qwen3) and raises completion `max_tokens` to 8000 so `<think>` traces fit; mutually exclusive with `--disable-thinking`. Graded text still goes through `strip_think`. Logged before the S16 Consent-subset thinking ablation and the `qwen3-32b` `enforced` and `prompt_enforced` factorial cells.
+
+### Harmony tool-call fallback for gpt-oss (S19)
+
+Some LocalAI and llama.cpp builds leave OpenAI gpt-oss Harmony commentary-channel tool calls in `message.content` instead of populating `tool_calls[]`. Native `--tool-mode` now falls back to `parse_harmony_tool_calls` on content when `tool_calls` is empty, executes the tools, and returns results as `role=tool` messages. Final answers prefer the Harmony `final` channel via `strip_harmony`. No grader change. Logged before the S19 `gpt-oss-20b` `record` plus `prompt` run.
 
 ## v0.3
 

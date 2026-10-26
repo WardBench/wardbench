@@ -27,7 +27,7 @@ Thank you for reviewing WardBench tasks. We are checking whether the **benchmark
 
 ## Please do not
 
-- Try to “beat” or help a model.
+- Try to game a model or help it cheat.
 - Paste real patient data into comments.
 - Treat this sheet as legal advice or as a certification of compliance.
 

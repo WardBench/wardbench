@@ -172,7 +172,7 @@ def main(argv=None):
             "invalid": rate_with_n(*(counts.get("invalid_response_rate") or [0, 0])),
         }
 
-    lines.append("## Refusal / invalid (context)")
+    lines.append("## Refusal and invalid responses (context)")
     lines.append("")
     lines.append("| model | mode | false_refusal_proxy | invalid_response |")
     lines.append("|---|---|---|---|")
@@ -185,61 +185,30 @@ def main(argv=None):
     lines.append("## Findings")
     lines.append("")
     stems_present = {s for s, _ in rows}
-    if "qwen2.5-7b-fc" in stems_present and "qwen3-14b" in stems_present:
+    if "gemma4-31b" in stems_present and "gpt-oss-20b" in stems_present:
         lines.append(
-            "- Local scale curve targets `qwen2.5-7b-fc` → `qwen3-14b` → `qwen3-32b` "
-            "(when the 32B pair is present)."
+            "- **Unified 11-model matrix (S19, S20):** Under raw `prompt`, `gemma4-31b` (`react_json`, 76/85 = 89% util, 0/120 = 0% viol) and `gpt-oss-20b` (`native+harmony`, 44/85 = 52% util, 4/120 = 3% viol) lead the safe band (viol <= 5%). See `R20_vendor_leaderboard.md`, `R21_vendor_leaderboard_ranking.md`, and `R21b_s20b_did_top2.md` for S20b Defense-in-Depth results."
         )
-    if "qwen3-14b" in stems_present:
-        lines.append(
-            "- **qwen3-14b** shows a clear policy-in-prompt effect on the 2-model baseline: "
-            "violations 43%→22% at nearly flat utility (66%→62%); "
-            "conditional compliance 6%→60%."
-        )
-    if "qwen2.5-7b-fc" in stems_present:
-        lines.append(
-            "- **qwen2.5-7b-fc** sits low on the Pareto chart (utility ≈20–21%, "
-            "violations ≈16–17%) with almost no prompt effect. False-refusal proxy "
-            "≈66–69% — under-retrieval floor, not better alignment."
-        )
-    if "qwen3-32b" in stems_present:
+    if "qwen3-14b" in stems_present and "qwen3-32b" in stems_present:
         r = dict(rows)["qwen3-32b"]
         ur, vr = r["record"]["utility"]["rate"], r["record"]["violation_rate"]["rate"]
         up, vp = r["prompt"]["utility"]["rate"], r["prompt"]["violation_rate"]["rate"]
-        cr = r["record"]["capability"]["rate"]
-        cp = r["prompt"]["capability"]["rate"]
         lines.append(
-            f"- **qwen3-32b** (LocalAI id `qwen3`, `gpu_layers:55`, `cache-ram:512`): "
-            f"record {100*ur:.0f}%/{100*vr:.0f}% → prompt {100*up:.0f}%/{100*vp:.0f}% "
-            f"(Δ viol {100*(vr-vp):+.1f} pp). Strongest local policy-in-prompt Δ-viol, "
-            f"but utility sits below 14B; capability {100*cr:.0f}%→{100*cp:.0f}% under prompt "
-            f"(see `R10_scale_regression.md`)."
+            f"- **Qwen scale curve (7B-fc, 14B, 32B):** `qwen3-14b` cuts violations from 43% to 22% at 62% utility; `qwen3-32b` cuts violations from {100*vr:.0f}% to {100*vp:.0f}% at {100*up:.0f}% raw utility (rising to 65/85 = 76.5% with `--api-norm` in S14c and 74/85 = 87.1% raw, 70/85 = 82.4% grounded at 0/120 violations under DiD+norm+strict-redaction in S16c)."
         )
-        if "qwen3-14b" in stems_present:
-            lines.append(
-                "- **Pareto pick on this local curve:** `qwen3-14b` still dominates utility; "
-                "`qwen3-32b` is the best local Δ-viol / conditional-compliance point under `prompt`, "
-                "not a free util upgrade."
-            )
-    lines.append(
-        "- Skipped biomedical GGUFs (no native OpenAI tool-call path for WardBench): "
-        "`OpenBioLLM-Llama3-8B` has `function.grammar.disable: true` in its LocalAI YAML; "
-        "`medgemma-4b-it` is a vision/chat import (`mmproj`, no `use_jinja` tool template). "
-        "Frontier APIs remain **S6a2**."
-    )
-    lines.append(
-        "- Prefer models that keep utility while cutting violations under `prompt` "
-        "(policy-in-prompt effect)."
-    )
+    if "openbiollm-8b" in stems_present and "medgemma-4b-it" in stems_present:
+        lines.append(
+            "- **Biomedical GGUFs (S13, R14):** Evaluated via `--tool-mode react_json` (`OpenBioLLM-8B` prompt util 3/85 = 4%, `MedGemma-4B-IT` 12/85 = 14%); neither enters the useful Pareto frontier."
+        )
     lines.append(
         "- `denied_twin_capability` on framing-heavy `-perm` twins underestimates "
-        "clinical ability (see R4c / R13b); compare capability cautiously across models. "
+        "clinical ability (see R4c and R13b); compare capability cautiously across models. "
         "Use `capability_consent_aware` only as sensitivity when a model checks Consent "
-        "and refuses inherited research/email framing."
+        "and refuses inherited research or email framing."
     )
     lines.append(
         "- Voluntary off-path DocRef exposure stays near zero on capable models "
-        "(S12 / R13): cite `attack_induced` only with the exposure decomposition."
+        "(S12 and R13): cite `attack_induced` only with the exposure decomposition."
     )
     if missing:
         lines.append(f"- Missing pairs (need both record+prompt JSON): `{missing}`")

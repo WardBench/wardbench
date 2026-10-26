@@ -362,6 +362,91 @@ def test_s_strict_redaction_prompt_clauses():
     assert "depressive disorder" not in prompt.lower()
 
 
+def test_s19_harmony_tool_parse_and_loop():
+    """S19: native mode falls back to Harmony commentary-channel tool calls."""
+    from wardbench.agents import (
+        Context,
+        OpenAICompatAgent,
+        parse_harmony_tool_calls,
+        strip_harmony,
+    )
+
+    raw = (
+        "<|channel|>analysis<|message|>thinking<|end|>"
+        "<|start|>assistant<|channel|>commentary to=functions.fhir_search "
+        "<|constrain|>json<|message|>"
+        '{"resource_type":"Patient","params":{"_id":"pt-001"}}'
+    )
+    calls = parse_harmony_tool_calls(raw)
+    assert len(calls) == 1
+    assert calls[0][0] == "fhir_search"
+    assert calls[0][1]["resource_type"] == "Patient"
+    assert strip_harmony(
+        "<|channel|>analysis<|message|>x<|end|>"
+        "<|channel|>final<|message|>Age is 53.<|end|>"
+    ) == "Age is 53."
+
+    seen = {}
+
+    def fhir_search(resource_type, params=None):
+        seen["search"] = (resource_type, params)
+        return {"total": 0, "entry": []}
+
+    class _Fn:
+        def __init__(self, name, arguments):
+            self.name = name
+            self.arguments = arguments
+
+    class _Msg:
+        def __init__(self, content, tool_calls=None):
+            self.content = content
+            self.tool_calls = tool_calls
+            self.reasoning = ""
+
+        def model_dump(self, exclude_none=True):
+            return {"role": "assistant", "content": self.content}
+
+    class _Choice:
+        def __init__(self, message):
+            self.message = message
+            self.finish_reason = "stop"
+
+    class _Resp:
+        def __init__(self, message):
+            self.choices = [_Choice(message)]
+            self.usage = None
+
+    class StubClient:
+        def __init__(self, script):
+            self.script = list(script)
+            self.kwargs = []
+            self.chat = self
+            self.completions = self
+
+        def create(self, **kwargs):
+            self.kwargs.append(kwargs)
+            assert "tools" in kwargs
+            return _Resp(self.script.pop(0))
+
+    client = StubClient([
+        _Msg(raw),
+        _Msg(
+            "<|channel|>final<|message|>No Patient found.<|end|>",
+            tool_calls=None,
+        ),
+    ])
+    agent = OpenAICompatAgent(
+        "stub", "http://example/v1", client=client, tool_mode="native", seed=1,
+    )
+    answer = agent.run(Context(
+        task={}, system="sys", instruction="find patient", subject="pt-001",
+        tools={"fhir_search": fhir_search},
+    ))
+    assert answer == "No Patient found."
+    assert seen["search"][0] == "Patient"
+    assert any(m.get("role") == "tool" for m in client.kwargs[1]["messages"])
+
+
 def test_s_react_json_tool_parse_and_loop():
     """S13: --tool-mode react_json parses JSON tool turns without native tools=."""
     from wardbench.agents import (
