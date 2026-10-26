@@ -1,0 +1,23 @@
+WardBench
+Copyright 2026 Vadim Nareyko
+
+This product includes software developed for evaluating policy compliance of
+LLM agents in synthetic clinical FHIR environments.
+
+---------------------------------------------------------------------------
+Third-party attribution
+
+Synthea (synthetic patient generator)
+  Copyright the Synthea authors and contributors
+  License: Apache License 2.0
+  Source: https://github.com/synthetichealth/synthea
+
+  WardBench development and held-out cohorts are derived from Synthea-generated
+  FHIR R4 patients (generation seed documented in project CHANGELOG / manifests).
+  Synthea itself is not redistributed in binary form in this repository; only
+  derived synthetic patient artifacts used by the benchmark (where present under
+  cohort/ or generated locally) inherit attribution requirements under Apache-2.0.
+
+No code from MedAgentBench, FHIR-AgentBench, or other cited benchmarks is
+copied into this repository; those works are cited as related research only.
+---------------------------------------------------------------------------
