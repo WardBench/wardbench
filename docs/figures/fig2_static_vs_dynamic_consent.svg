@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="540" viewBox="0 0 980 540" role="img" aria-label="Static Role/Purpose vs Dynamic FHIR Consent">
+<title>Static Role/Purpose vs Dynamic FHIR Consent</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="490.0" y="28.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="13.5" text-anchor="middle" font-weight="bold" fill="#111">Fig. 2 — Static Role/Purpose (n=30) vs Dynamic FHIR Consent (n=30): Violations &amp; Epistemic Checks</text>
+<rect x="68.0" y="56.0" width="876.0" height="392.0" fill="#fafafa" stroke="#ccc" stroke-width="1"/>
+<line x1="68.0" y1="448.0" x2="944.0" y2="448.0" stroke="#222" stroke-width="1.5"/>
+<line x1="68.0" y1="56.0" x2="68.0" y2="448.0" stroke="#222" stroke-width="1.5"/>
+<line x1="64.0" y1="448.0" x2="68.0" y2="448.0" stroke="#444" stroke-width="1"/>
+<text x="60.0" y="452.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">0%</text>
+<line x1="68.0" y1="448.0" x2="944.0" y2="448.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="64.0" y1="373.3" x2="68.0" y2="373.3" stroke="#444" stroke-width="1"/>
+<text x="60.0" y="377.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">20%</text>
+<line x1="68.0" y1="373.3" x2="944.0" y2="373.3" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="64.0" y1="298.7" x2="68.0" y2="298.7" stroke="#444" stroke-width="1"/>
+<text x="60.0" y="302.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">40%</text>
+<line x1="68.0" y1="298.7" x2="944.0" y2="298.7" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="64.0" y1="224.0" x2="68.0" y2="224.0" stroke="#444" stroke-width="1"/>
+<text x="60.0" y="228.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">60%</text>
+<line x1="68.0" y1="224.0" x2="944.0" y2="224.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="64.0" y1="149.3" x2="68.0" y2="149.3" stroke="#444" stroke-width="1"/>
+<text x="60.0" y="153.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">80%</text>
+<line x1="68.0" y1="149.3" x2="944.0" y2="149.3" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="64.0" y1="74.7" x2="68.0" y2="74.7" stroke="#444" stroke-width="1"/>
+<text x="60.0" y="78.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">100%</text>
+<line x1="68.0" y1="74.7" x2="944.0" y2="74.7" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="20" y="252.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#111" transform="rotate(-90 20,252.0)">Bucket rate (%, n=30 per bucket)</text>
+<rect x="78.7" y="161.7" width="22.6" height="286.3" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="90.0" y="150.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">76.7%</text>
+<text x="90.0" y="159.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(23/30)</text>
+<rect x="104.3" y="211.7" width="22.6" height="236.3" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="115.7" y="200.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">63.3%</text>
+<text x="115.7" y="209.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(19/30)</text>
+<rect x="130.0" y="446.5" width="22.6" height="1.5" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="141.3" y="435.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">0.0%</text>
+<text x="141.3" y="444.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(0/30)</text>
+<text x="116.7" y="466.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.2" text-anchor="middle" font-weight="bold" fill="#111">14B record</text>
+<rect x="176.0" y="435.7" width="22.6" height="12.3" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="187.4" y="424.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">3.3%</text>
+<text x="187.4" y="433.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(1/30)</text>
+<rect x="201.7" y="224.0" width="22.6" height="224.0" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="213.0" y="213.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">60.0%</text>
+<text x="213.0" y="222.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(18/30)</text>
+<rect x="227.3" y="435.7" width="22.6" height="12.3" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="238.6" y="424.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">3.3%</text>
+<text x="238.6" y="433.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(1/30)</text>
+<text x="214.0" y="466.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.2" text-anchor="middle" font-weight="bold" fill="#111">14B prompt</text>
+<rect x="273.4" y="398.3" width="22.6" height="49.7" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="284.7" y="387.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">13.3%</text>
+<text x="284.7" y="396.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(4/30)</text>
+<rect x="299.0" y="311.0" width="22.6" height="137.0" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="310.3" y="300.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">36.7%</text>
+<text x="310.3" y="309.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(11/30)</text>
+<rect x="324.6" y="385.7" width="22.6" height="62.3" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="336.0" y="374.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">16.7%</text>
+<text x="336.0" y="383.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(5/30)</text>
+<text x="311.3" y="466.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.2" text-anchor="middle" font-weight="bold" fill="#111">32B prompt</text>
+<rect x="370.7" y="435.7" width="22.6" height="12.3" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="382.0" y="424.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">3.3%</text>
+<text x="382.0" y="433.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(1/30)</text>
+<rect x="396.3" y="385.7" width="22.6" height="62.3" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="407.7" y="374.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">16.7%</text>
+<text x="407.7" y="383.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(5/30)</text>
+<rect x="422.0" y="446.5" width="22.6" height="1.5" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="433.3" y="435.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">0.0%</text>
+<text x="433.3" y="444.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(0/30*)</text>
+<text x="408.7" y="464.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="middle" font-weight="bold" fill="#111">14B prompt</text>
+<text x="408.7" y="477.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.6" text-anchor="middle" font-weight="normal" fill="#333">+ prefetch</text>
+<rect x="468.0" y="435.7" width="22.6" height="12.3" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="479.4" y="424.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">3.3%</text>
+<text x="479.4" y="433.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(1/30)</text>
+<rect x="493.7" y="373.3" width="22.6" height="74.7" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="505.0" y="362.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">20.0%</text>
+<text x="505.0" y="371.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(6/30)</text>
+<rect x="519.3" y="87.0" width="22.6" height="361.0" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="530.6" y="76.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">96.7%</text>
+<text x="530.6" y="85.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(29/30)</text>
+<text x="506.0" y="464.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="middle" font-weight="bold" fill="#111">14B prompt</text>
+<text x="506.0" y="477.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.6" text-anchor="middle" font-weight="normal" fill="#333">+ redact v1</text>
+<rect x="565.4" y="435.7" width="22.6" height="12.3" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="576.7" y="424.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">3.3%</text>
+<text x="576.7" y="433.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(1/30)</text>
+<rect x="591.0" y="446.5" width="22.6" height="1.5" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="602.3" y="435.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">0.0%</text>
+<text x="602.3" y="444.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(0/30)</text>
+<rect x="616.6" y="87.0" width="22.6" height="361.0" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="628.0" y="76.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">96.7%</text>
+<text x="628.0" y="85.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(29/30)</text>
+<text x="603.3" y="464.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="middle" font-weight="bold" fill="#111">14B prompt</text>
+<text x="603.3" y="477.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.6" text-anchor="middle" font-weight="normal" fill="#333">+ redact v2</text>
+<rect x="662.7" y="446.5" width="22.6" height="1.5" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="674.0" y="435.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">0.0%</text>
+<text x="674.0" y="444.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(0/30)</text>
+<rect x="688.3" y="435.7" width="22.6" height="12.3" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="699.7" y="424.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">3.3%</text>
+<text x="699.7" y="433.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(1/30)</text>
+<rect x="714.0" y="423.0" width="22.6" height="25.0" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="725.3" y="412.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">6.7%</text>
+<text x="725.3" y="421.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(2/30)</text>
+<text x="700.7" y="466.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.2" text-anchor="middle" font-weight="bold" fill="#111">14B prompt_enforced</text>
+<rect x="760.0" y="446.5" width="22.6" height="1.5" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="771.4" y="435.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">0.0%</text>
+<text x="771.4" y="444.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(0/30)</text>
+<rect x="785.7" y="435.7" width="22.6" height="12.3" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="797.0" y="424.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">3.3%</text>
+<text x="797.0" y="433.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(1/30)</text>
+<rect x="811.3" y="236.3" width="22.6" height="211.7" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="822.6" y="225.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">56.7%</text>
+<text x="822.6" y="234.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(17/30)</text>
+<text x="798.0" y="464.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="middle" font-weight="bold" fill="#111">32B DiD</text>
+<text x="798.0" y="477.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.6" text-anchor="middle" font-weight="normal" fill="#333">+ api-norm</text>
+<rect x="857.4" y="446.5" width="22.6" height="1.5" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="868.7" y="435.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">0.0%</text>
+<text x="868.7" y="444.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(0/30)</text>
+<rect x="883.0" y="446.5" width="22.6" height="1.5" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="894.3" y="435.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">0.0%</text>
+<text x="894.3" y="444.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(0/30)</text>
+<rect x="908.6" y="211.7" width="22.6" height="236.3" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="920.0" y="200.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="7.6" text-anchor="middle" font-weight="bold" fill="#222">63.3%</text>
+<text x="920.0" y="209.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="6.8" text-anchor="middle" font-weight="normal" fill="#555">(19/30)</text>
+<text x="895.3" y="466.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.2" text-anchor="middle" font-weight="bold" fill="#111">32B DiD+norm+redact</text>
+<rect x="68.0" y="496.0" width="12.0" height="12.0" fill="#3b6998" stroke="#222" stroke-width="0.5"/>
+<text x="85.0" y="506.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="start" font-weight="bold" fill="#111">Static Role/Purpose Viol. (n=30)</text>
+<rect x="303.0" y="496.0" width="12.0" height="12.0" fill="#c0392b" stroke="#222" stroke-width="0.5"/>
+<text x="320.0" y="506.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="start" font-weight="bold" fill="#111">Dynamic FHIR Consent Viol. (n=30)</text>
+<rect x="558.0" y="496.0" width="12.0" height="12.0" fill="#1e824c" stroke="#222" stroke-width="0.5"/>
+<text x="575.0" y="506.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="start" font-weight="bold" fill="#111">Dynamic Consent-Check Rate (n=30)</text>
+<text x="68.0" y="528.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#444">*Note: prefetch supplies Consent in context (18/30→5/30 dyn viol, McNemar p=2.4e-4). Strict-redact v1 lifts checks 1/30→29/30 (p=7.5e-9); v2 clears all 6 PSY e.g.-leaks (6/30→0/30). 32B DiD+norm overall viol=2/120 (1.7%), overall Consent checks=31/120 (25.8%).</text>
+</svg>

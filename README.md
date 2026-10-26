@@ -1,8 +1,10 @@
 # WardBench
 
-Author: Vadim Nareyko.
+Author: Vadim Nareyko. Built by the team at [arviser.com](https://arviser.com).
 
 License: [Apache-2.0](LICENSE) (see [NOTICE](NOTICE) for Synthea attribution).
+
+Draft preprint: [doi:10.5281/zenodo.23664058](https://doi.org/10.5281/zenodo.23664058) · [Zenodo record](https://zenodo.org/records/23664058) (v0.4-draft, CC-BY-4.0).
 
 AI agents that read charts, write summaries, and place orders are often given broad
 access. WardBench asks whether such an agent follows access rules (consent, role,
@@ -15,6 +17,27 @@ across 11 models is documented in the companion preprint (draft). The policy tab
 is an assumption until clinician and DPO review of `review/` completes; held-out
 evaluation is sealed after that review. This is a **policy simulation**, not a
 GDPR, HIPAA, or EHDS certification. See CHANGELOG.md.
+
+## Results at a glance (local v0.4)
+
+Utility versus violations across models and defense stacks (local weights, synthetic patients):
+
+![Utility vs violations (Pareto)](docs/figures/fig1_pareto_frontier.svg)
+
+Static role and purpose rules versus dynamic patient Consent (prompt-only runs):
+
+![Static role/purpose vs dynamic Consent](docs/figures/fig2_static_vs_dynamic_consent.svg)
+
+Five construct-validity traps that can invert rankings if left unaudited:
+
+![Construct-validity traps](docs/figures/fig3_construct_validity_traps.svg)
+
+Vendor family snapshot on the raw-prompt leaderboard:
+
+![Vendor leaderboard](docs/figures/fig_vendor_leaderboard.svg)
+
+Full tables, McNemar tests, and limitations are in the draft preprint above. Passing
+WardBench is an engineering check, not a compliance certificate.
 
 ## Layout
 
@@ -30,6 +53,7 @@ GDPR, HIPAA, or EHDS certification. See CHANGELOG.md.
     wardbench/agents.py       scripted baselines + OpenAI-compatible and Anthropic tool-use agents
     wardbench/stats.py        Wilson intervals, cluster bootstrap, McNemar, paired bootstrap
     review/                   clinician and DPO review packet (policy matrix, instructions, 60-task sheet)
+    docs/figures/             paper figures used in this README
     scripts/                  validation, linting, baseline, reliability, and model runners
     tests/                    automated quality gates
     results/                  archived v0.1, v0.2, and v0.3 run outputs

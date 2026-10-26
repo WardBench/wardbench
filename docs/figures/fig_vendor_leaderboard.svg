@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="620" viewBox="0 0 920 620">
+<rect width="920" height="620" fill="#fff"/>
+<text x="460.0" y="28" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="16" font-weight="bold">WardBench vendor board — prompt utility vs violation (S20)</text>
+<line x1="70" y1="50" x2="70" y2="560" stroke="#333" stroke-width="1.5"/>
+<line x1="70" y1="560" x2="880" y2="560" stroke="#333" stroke-width="1.5"/>
+<line x1="70.0" y1="50" x2="70.0" y2="560" stroke="#eee"/>
+<text x="70.0" y="578" text-anchor="middle" font-size="11" font-family="Helvetica,Arial,sans-serif">0%</text>
+<line x1="232.0" y1="50" x2="232.0" y2="560" stroke="#eee"/>
+<text x="232.0" y="578" text-anchor="middle" font-size="11" font-family="Helvetica,Arial,sans-serif">10%</text>
+<line x1="394.0" y1="50" x2="394.0" y2="560" stroke="#eee"/>
+<text x="394.0" y="578" text-anchor="middle" font-size="11" font-family="Helvetica,Arial,sans-serif">20%</text>
+<line x1="556.0" y1="50" x2="556.0" y2="560" stroke="#eee"/>
+<text x="556.0" y="578" text-anchor="middle" font-size="11" font-family="Helvetica,Arial,sans-serif">30%</text>
+<line x1="718.0" y1="50" x2="718.0" y2="560" stroke="#eee"/>
+<text x="718.0" y="578" text-anchor="middle" font-size="11" font-family="Helvetica,Arial,sans-serif">40%</text>
+<line x1="880.0" y1="50" x2="880.0" y2="560" stroke="#eee"/>
+<text x="880.0" y="578" text-anchor="middle" font-size="11" font-family="Helvetica,Arial,sans-serif">50%</text>
+<line x1="70" y1="560.0" x2="880" y2="560.0" stroke="#eee"/>
+<text x="62" y="564.0" text-anchor="end" font-size="11" font-family="Helvetica,Arial,sans-serif">0%</text>
+<line x1="70" y1="458.0" x2="880" y2="458.0" stroke="#eee"/>
+<text x="62" y="462.0" text-anchor="end" font-size="11" font-family="Helvetica,Arial,sans-serif">20%</text>
+<line x1="70" y1="356.0" x2="880" y2="356.0" stroke="#eee"/>
+<text x="62" y="360.0" text-anchor="end" font-size="11" font-family="Helvetica,Arial,sans-serif">40%</text>
+<line x1="70" y1="254.0" x2="880" y2="254.0" stroke="#eee"/>
+<text x="62" y="258.0" text-anchor="end" font-size="11" font-family="Helvetica,Arial,sans-serif">60%</text>
+<line x1="70" y1="152.0" x2="880" y2="152.0" stroke="#eee"/>
+<text x="62" y="156.0" text-anchor="end" font-size="11" font-family="Helvetica,Arial,sans-serif">80%</text>
+<line x1="70" y1="50.0" x2="880" y2="50.0" stroke="#eee"/>
+<text x="62" y="54.0" text-anchor="end" font-size="11" font-family="Helvetica,Arial,sans-serif">100%</text>
+<text x="475.0" y="608" text-anchor="middle" font-size="12" font-family="Helvetica,Arial,sans-serif">Violation rate (prompt, %)</text>
+<text x="18" y="305.0" transform="rotate(-90 18,305.0)" text-anchor="middle" font-size="12" font-family="Helvetica,Arial,sans-serif">Utility (non-refuse, %)</text>
+<rect x="70" y="50" width="81.0" height="510" fill="#e6f4ea" opacity="0.45"/>
+<text x="76" y="64" font-size="10" fill="#0b8043" font-family="Helvetica,Arial,sans-serif">viol ≤5%</text>
+<circle cx="110.5" cy="542.0" r="6" fill="#a142f4" stroke="#222" stroke-width="0.8"/>
+<text x="118.5" y="536.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#a142f4">openbiollm-8b</text>
+<circle cx="340.0" cy="488.0" r="6" fill="#f439a0" stroke="#222" stroke-width="0.8"/>
+<text x="348.0" y="482.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#f439a0">medgemma-4b-it</text>
+<circle cx="326.5" cy="458.0" r="6" fill="#f9ab00" stroke="#222" stroke-width="0.8"/>
+<text x="334.5" y="452.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#f9ab00">qwen2.5-7b-fc</text>
+<circle cx="421.0" cy="242.0" r="6" fill="#e37400" stroke="#222" stroke-width="0.8"/>
+<text x="429.0" y="236.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#e37400">qwen3-14b</text>
+<circle cx="367.0" cy="278.0" r="6" fill="#d93025" stroke="#222" stroke-width="0.8"/>
+<text x="375.0" y="272.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#d93025">qwen3-32b</text>
+<circle cx="124.0" cy="296.0" r="6" fill="#1a73e8" stroke="#222" stroke-width="0.8"/>
+<text x="132.0" y="290.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#1a73e8">gpt-oss-20b</text>
+<circle cx="340.0" cy="314.0" r="6" fill="#9334e6" stroke="#222" stroke-width="0.8"/>
+<text x="348.0" y="308.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#9334e6">glm47-flash</text>
+<circle cx="151.0" cy="398.0" r="6" fill="#00897b" stroke="#222" stroke-width="0.8"/>
+<text x="159.0" y="392.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#00897b">phi4-14b</text>
+<circle cx="407.5" cy="440.0" r="6" fill="#5f6368" stroke="#222" stroke-width="0.8"/>
+<text x="415.5" y="434.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#5f6368">devstral-24b</text>
+<circle cx="178.0" cy="494.0" r="6" fill="#9aa0a6" stroke="#222" stroke-width="0.8"/>
+<text x="186.0" y="488.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#9aa0a6">granite42-30b</text>
+<circle cx="70.0" cy="104.0" r="6" fill="#0b8043" stroke="#222" stroke-width="0.8"/>
+<text x="78.0" y="98.0" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#0b8043">gemma4-31b</text>
+<polygon points="70.0,106.79000000000002 75.0,113.79000000000002 79.0,113.79000000000002 76.0,118.79000000000002 77.0,124.79000000000002 70.0,120.79000000000002 63.0,124.79000000000002 64.0,118.79000000000002 61.0,113.79000000000002 65.0,113.79000000000002" fill="#d93025" stroke="#222" stroke-width="0.6"/>
+<text x="82.0" y="119.79000000000002" font-size="10" font-family="Helvetica,Arial,sans-serif" fill="#d93025">qwen3-32b DiD+norm+redact (S16c)</text>
+</svg>

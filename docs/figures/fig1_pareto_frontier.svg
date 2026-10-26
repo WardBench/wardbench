@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="650" viewBox="0 0 980 650" role="img" aria-label="WardBench Pareto: Utility vs Violation Rate">
+<title>WardBench Pareto: Utility vs Violation Rate</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="490.0" y="28.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="13.5" text-anchor="middle" font-weight="bold" fill="#111">Fig. 1 — Non-refuse clinical utility vs policy violation rate (dev, 95% Wilson CI on both axes)</text>
+<rect x="72.0" y="52.0" width="668.0" height="536.0" fill="#fafafa" stroke="#ccc" stroke-width="1"/>
+<line x1="72.0" y1="588.0" x2="740.0" y2="588.0" stroke="#222" stroke-width="1.5"/>
+<line x1="72.0" y1="52.0" x2="72.0" y2="588.0" stroke="#222" stroke-width="1.5"/>
+<text x="406.0" y="632.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.5" text-anchor="middle" font-weight="bold" fill="#111">Policy violation rate (%, n=120 main tasks)  ← lower is better</text>
+<text x="20" y="320.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="bold" fill="#111" transform="rotate(-90 20,320.0)">Non-refuse clinical utility (%, n=85)  → higher is better</text>
+<line x1="72.0" y1="588.0" x2="72.0" y2="593.0" stroke="#444" stroke-width="1"/>
+<text x="72.0" y="606.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="middle" font-weight="normal" fill="#444">0%</text>
+<line x1="72.0" y1="52.0" x2="72.0" y2="588.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="200.5" y1="588.0" x2="200.5" y2="593.0" stroke="#444" stroke-width="1"/>
+<text x="200.5" y="606.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="middle" font-weight="normal" fill="#444">10%</text>
+<line x1="200.5" y1="52.0" x2="200.5" y2="588.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="328.9" y1="588.0" x2="328.9" y2="593.0" stroke="#444" stroke-width="1"/>
+<text x="328.9" y="606.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="middle" font-weight="normal" fill="#444">20%</text>
+<line x1="328.9" y1="52.0" x2="328.9" y2="588.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="457.4" y1="588.0" x2="457.4" y2="593.0" stroke="#444" stroke-width="1"/>
+<text x="457.4" y="606.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="middle" font-weight="normal" fill="#444">30%</text>
+<line x1="457.4" y1="52.0" x2="457.4" y2="588.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="585.8" y1="588.0" x2="585.8" y2="593.0" stroke="#444" stroke-width="1"/>
+<text x="585.8" y="606.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="middle" font-weight="normal" fill="#444">40%</text>
+<line x1="585.8" y1="52.0" x2="585.8" y2="588.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="714.3" y1="588.0" x2="714.3" y2="593.0" stroke="#444" stroke-width="1"/>
+<text x="714.3" y="606.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="middle" font-weight="normal" fill="#444">50%</text>
+<line x1="714.3" y1="52.0" x2="714.3" y2="588.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="67.0" y1="588.0" x2="72.0" y2="588.0" stroke="#444" stroke-width="1"/>
+<text x="64.0" y="592.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">0%</text>
+<line x1="72.0" y1="588.0" x2="740.0" y2="588.0" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="67.0" y1="484.9" x2="72.0" y2="484.9" stroke="#444" stroke-width="1"/>
+<text x="64.0" y="488.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">20%</text>
+<line x1="72.0" y1="484.9" x2="740.0" y2="484.9" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="67.0" y1="381.8" x2="72.0" y2="381.8" stroke="#444" stroke-width="1"/>
+<text x="64.0" y="385.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">40%</text>
+<line x1="72.0" y1="381.8" x2="740.0" y2="381.8" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="67.0" y1="278.8" x2="72.0" y2="278.8" stroke="#444" stroke-width="1"/>
+<text x="64.0" y="282.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">60%</text>
+<line x1="72.0" y1="278.8" x2="740.0" y2="278.8" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="67.0" y1="175.7" x2="72.0" y2="175.7" stroke="#444" stroke-width="1"/>
+<text x="64.0" y="179.7" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">80%</text>
+<line x1="72.0" y1="175.7" x2="740.0" y2="175.7" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="67.0" y1="72.6" x2="72.0" y2="72.6" stroke="#444" stroke-width="1"/>
+<text x="64.0" y="76.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="10" text-anchor="end" font-weight="normal" fill="#444">100%</text>
+<line x1="72.0" y1="72.6" x2="740.0" y2="72.6" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>
+<polyline points="628.7,248.5 350.3,266.6 125.5,236.3 93.4,187.8" fill="none" stroke="#1f6feb" stroke-width="1.8" stroke-opacity="0.55" stroke-dasharray="5,4"/>
+<polyline points="671.5,297.0 307.5,303.0 328.9,193.9 93.4,151.4 72.0,139.3" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-opacity="0.55" stroke-dasharray="5,4"/>
+<line x1="72.0" y1="72.6" x2="72.0" y2="94.9" stroke="#0a7a2f" stroke-width="1.1"/>
+<line x1="69.0" y1="72.6" x2="75.0" y2="72.6" stroke="#0a7a2f" stroke-width="1.0"/>
+<line x1="69.0" y1="94.9" x2="75.0" y2="94.9" stroke="#0a7a2f" stroke-width="1.0"/>
+<circle cx="72.0" cy="72.6" r="7.0" fill="#0a7a2f" stroke="#111" stroke-width="1.1" fill-opacity="1.0"/>
+<circle cx="72.0" cy="72.6" r="2.6" fill="#fff" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="82.0" y="76.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="bold" fill="#0a7a2f">ToolSolver (100%, 0%)</text>
+<line x1="72.0" y1="97.6" x2="72.0" y2="162.7" stroke="#0a7a2f" stroke-width="1.1"/>
+<line x1="69.0" y1="97.6" x2="75.0" y2="97.6" stroke="#0a7a2f" stroke-width="1.0"/>
+<line x1="69.0" y1="162.7" x2="75.0" y2="162.7" stroke="#0a7a2f" stroke-width="1.0"/>
+<polygon points="72.0,114.6 78.5,121.1 72.0,127.6 65.5,121.1" fill="#0a7a2f" stroke="#111" stroke-width="0.8"/>
+<text x="82.0" y="125.1" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="bold" fill="#0a7a2f">ToolSolver enforced (90.6%, 0%)</text>
+<line x1="114.8" y1="505.4" x2="114.8" y2="567.1" stroke="#666666" stroke-width="1.1"/>
+<line x1="111.8" y1="505.4" x2="117.8" y2="505.4" stroke="#666666" stroke-width="1.0"/>
+<line x1="111.8" y1="567.1" x2="117.8" y2="567.1" stroke="#666666" stroke-width="1.0"/>
+<line x1="88.7" y1="545.6" x2="178.1" y2="545.6" stroke="#666666" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="114.8" cy="545.6" r="5.2" fill="#666666" stroke="#111" stroke-width="0.8" fill-opacity="1.0"/>
+<text x="122.8" y="540.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">OpenBioLLM-8B rec (8.2%, 3.3%)</text>
+<line x1="104.1" y1="537.1" x2="104.1" y2="581.8" stroke="#555555" stroke-width="1.1"/>
+<line x1="101.1" y1="537.1" x2="107.1" y2="537.1" stroke="#555555" stroke-width="1.0"/>
+<line x1="101.1" y1="581.8" x2="107.1" y2="581.8" stroke="#555555" stroke-width="1.0"/>
+<line x1="83.0" y1="569.8" x2="163.1" y2="569.8" stroke="#555555" stroke-width="1.0" stroke-dasharray="2,2"/>
+<rect x="99.3" y="565.0" width="9.6" height="9.6" fill="#555555" stroke="#111" stroke-width="0.8"/>
+<text x="112.1" y="580.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">OpenBioLLM-8B prm (3.5%, 2.5%)</text>
+<line x1="286.1" y1="469.1" x2="286.1" y2="545.4" stroke="#8a6500" stroke-width="1.1"/>
+<line x1="283.1" y1="469.1" x2="289.1" y2="469.1" stroke="#8a6500" stroke-width="1.0"/>
+<line x1="283.1" y1="545.4" x2="289.1" y2="545.4" stroke="#8a6500" stroke-width="1.0"/>
+<line x1="214.0" y1="515.2" x2="384.7" y2="515.2" stroke="#8a6500" stroke-width="1.0" stroke-dasharray="2,2"/>
+<rect x="281.3" y="510.4" width="9.6" height="9.6" fill="#8a6500" stroke="#111" stroke-width="0.8"/>
+<text x="295.1" y="527.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">MedGemma-4B rec/prm (14.1%, 16.7%)</text>
+<line x1="286.1" y1="428.2" x2="286.1" y2="516.7" stroke="#6b4ce6" stroke-width="1.1"/>
+<line x1="283.1" y1="428.2" x2="289.1" y2="428.2" stroke="#6b4ce6" stroke-width="1.0"/>
+<line x1="283.1" y1="516.7" x2="289.1" y2="516.7" stroke="#6b4ce6" stroke-width="1.0"/>
+<line x1="214.0" y1="478.9" x2="384.7" y2="478.9" stroke="#6b4ce6" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="286.1" cy="478.9" r="5.2" fill="#6b4ce6" stroke="#111" stroke-width="0.8" fill-opacity="1.0"/>
+<text x="295.1" y="474.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">7B-FC record (21.2%, 16.7%)</text>
+<line x1="275.4" y1="434.9" x2="275.4" y2="521.6" stroke="#6b4ce6" stroke-width="1.1"/>
+<line x1="272.4" y1="434.9" x2="278.4" y2="434.9" stroke="#6b4ce6" stroke-width="1.0"/>
+<line x1="272.4" y1="521.6" x2="278.4" y2="521.6" stroke="#6b4ce6" stroke-width="1.0"/>
+<line x1="205.3" y1="484.9" x2="372.7" y2="484.9" stroke="#6b4ce6" stroke-width="1.0" stroke-dasharray="2,2"/>
+<rect x="270.6" y="480.1" width="9.6" height="9.6" fill="#6b4ce6" stroke="#111" stroke-width="0.8"/>
+<text x="266.4" y="488.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" fill="#222">7B-FC prompt (20.0%, 15.8%)</text>
+<line x1="382.4" y1="382.8" x2="382.4" y2="480.9" stroke="#6b4ce6" stroke-width="1.1"/>
+<line x1="379.4" y1="382.8" x2="385.4" y2="382.8" stroke="#6b4ce6" stroke-width="1.0"/>
+<line x1="379.4" y1="480.9" x2="385.4" y2="480.9" stroke="#6b4ce6" stroke-width="1.0"/>
+<line x1="295.3" y1="436.4" x2="490.1" y2="436.4" stroke="#6b4ce6" stroke-width="1.0" stroke-dasharray="2,2"/>
+<polygon points="382.4,429.9 388.9,436.4 382.4,442.9 375.9,436.4" fill="#6b4ce6" stroke="#111" stroke-width="0.8"/>
+<text x="391.4" y="440.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">7B-FC prompt+norm (29.4%, 24.2%)</text>
+<line x1="628.7" y1="201.1" x2="628.7" y2="302.9" stroke="#1f6feb" stroke-width="1.1"/>
+<line x1="625.7" y1="201.1" x2="631.7" y2="201.1" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="625.7" y1="302.9" x2="631.7" y2="302.9" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="519.2" y1="248.5" x2="743.5" y2="248.5" stroke="#1f6feb" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="628.7" cy="248.5" r="5.2" fill="#1f6feb" stroke="#111" stroke-width="0.8" fill-opacity="1.0"/>
+<text x="619.7" y="242.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" fill="#222">14B record (65.9%, 43.3%)</text>
+<line x1="350.3" y1="217.4" x2="350.3" y2="321.4" stroke="#1f6feb" stroke-width="1.1"/>
+<line x1="347.3" y1="217.4" x2="353.3" y2="217.4" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="347.3" y1="321.4" x2="353.3" y2="321.4" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="267.7" y1="266.6" x2="455.5" y2="266.6" stroke="#1f6feb" stroke-width="1.0" stroke-dasharray="2,2"/>
+<rect x="345.5" y="261.8" width="9.6" height="9.6" fill="#1f6feb" stroke="#111" stroke-width="0.8"/>
+<text x="359.3" y="278.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">14B prompt (62.4%, 21.7%)</text>
+<line x1="296.8" y1="201.1" x2="296.8" y2="302.9" stroke="#1f6feb" stroke-width="1.1"/>
+<line x1="293.8" y1="201.1" x2="299.8" y2="201.1" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="293.8" y1="302.9" x2="299.8" y2="302.9" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="222.8" y1="248.5" x2="396.7" y2="248.5" stroke="#1f6feb" stroke-width="1.0" stroke-dasharray="2,2"/>
+<polygon points="296.8,242.0 303.3,248.5 296.8,255.0 290.3,248.5" fill="#1f6feb" stroke="#111" stroke-width="0.8"/>
+<text x="305.8" y="243.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">14B prompt+norm (65.9%, 17.5%)</text>
+<line x1="125.5" y1="190.3" x2="125.5" y2="290.4" stroke="#1f6feb" stroke-width="1.1"/>
+<line x1="122.5" y1="190.3" x2="128.5" y2="190.3" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="122.5" y1="290.4" x2="128.5" y2="290.4" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="95.0" y1="236.3" x2="192.6" y2="236.3" stroke="#1f6feb" stroke-width="1.0" stroke-dasharray="2,2"/>
+<polygon points="125.5,229.8 132.0,241.8 119.0,241.8" fill="#1f6feb" stroke="#111" stroke-width="0.8"/>
+<text x="134.5" y="232.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">14B enforced (68.2%, 4.2%)</text>
+<line x1="93.4" y1="148.9" x2="93.4" y2="239.1" stroke="#1f6feb" stroke-width="1.1"/>
+<line x1="90.4" y1="148.9" x2="96.4" y2="148.9" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="90.4" y1="239.1" x2="96.4" y2="239.1" stroke="#1f6feb" stroke-width="1.0"/>
+<line x1="77.9" y1="187.8" x2="147.5" y2="187.8" stroke="#1f6feb" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="93.4" cy="187.8" r="7.0" fill="#1f6feb" stroke="#111" stroke-width="1.1" fill-opacity="1.0"/>
+<circle cx="93.4" cy="187.8" r="2.6" fill="#fff" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="103.4" y="199.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">14B prompt_enforced (77.6%, 1.7%)</text>
+<line x1="671.5" y1="245.2" x2="671.5" y2="351.6" stroke="#c0392b" stroke-width="1.1"/>
+<line x1="668.5" y1="245.2" x2="674.5" y2="245.2" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="668.5" y1="351.6" x2="674.5" y2="351.6" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="559.9" y1="297.0" x2="785.7" y2="297.0" stroke="#c0392b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="671.5" cy="297.0" r="5.2" fill="#c0392b" stroke="#111" stroke-width="0.8" fill-opacity="1.0"/>
+<text x="662.5" y="311.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" fill="#222">32B record (56.5%, 46.7%)</text>
+<line x1="307.5" y1="250.9" x2="307.5" y2="357.5" stroke="#c0392b" stroke-width="1.1"/>
+<line x1="304.5" y1="250.9" x2="310.5" y2="250.9" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="304.5" y1="357.5" x2="310.5" y2="357.5" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="231.7" y1="303.0" x2="408.6" y2="303.0" stroke="#c0392b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<rect x="302.7" y="298.2" width="9.6" height="9.6" fill="#c0392b" stroke="#111" stroke-width="0.8"/>
+<text x="316.5" y="317.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">32B prompt (55.3%, 18.3%)</text>
+<line x1="328.9" y1="153.9" x2="328.9" y2="245.6" stroke="#c0392b" stroke-width="1.1"/>
+<line x1="325.9" y1="153.9" x2="331.9" y2="153.9" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="325.9" y1="245.6" x2="331.9" y2="245.6" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="249.6" y1="193.9" x2="432.2" y2="193.9" stroke="#c0392b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<polygon points="328.9,187.4 335.4,193.9 328.9,200.4 322.4,193.9" fill="#c0392b" stroke="#111" stroke-width="0.8"/>
+<text x="337.9" y="197.9" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">32B prompt+norm (76.5%, 20.0%)</text>
+<line x1="136.2" y1="201.1" x2="136.2" y2="302.9" stroke="#c0392b" stroke-width="1.1"/>
+<line x1="133.2" y1="201.1" x2="139.2" y2="201.1" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="133.2" y1="302.9" x2="139.2" y2="302.9" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="101.7" y1="248.5" x2="206.6" y2="248.5" stroke="#c0392b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<polygon points="136.2,242.0 142.7,254.0 129.7,254.0" fill="#c0392b" stroke="#111" stroke-width="0.8"/>
+<text x="145.2" y="259.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">32B enforced (65.9%, 5.0%)</text>
+<line x1="136.2" y1="206.5" x2="136.2" y2="309.1" stroke="#c0392b" stroke-width="1.1"/>
+<line x1="133.2" y1="206.5" x2="139.2" y2="206.5" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="133.2" y1="309.1" x2="139.2" y2="309.1" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="101.7" y1="254.5" x2="206.6" y2="254.5" stroke="#c0392b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<polygon points="136.2,248.0 142.7,260.0 129.7,260.0" fill="#c0392b" stroke="#111" stroke-width="0.8"/>
+<text x="145.2" y="277.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">32B prompt_enforced (64.7%, 5.0%)</text>
+<line x1="93.4" y1="119.8" x2="93.4" y2="198.5" stroke="#c0392b" stroke-width="1.1"/>
+<line x1="90.4" y1="119.8" x2="96.4" y2="119.8" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="90.4" y1="198.5" x2="96.4" y2="198.5" stroke="#c0392b" stroke-width="1.0"/>
+<line x1="77.9" y1="151.4" x2="147.5" y2="151.4" stroke="#c0392b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="93.4" cy="151.4" r="7.0" fill="#c0392b" stroke="#111" stroke-width="1.1" fill-opacity="1.0"/>
+<circle cx="93.4" cy="151.4" r="2.6" fill="#fff" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="103.4" y="163.4" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">32B DiD+norm (84.7%, 1.7%)</text>
+<line x1="72.0" y1="110.7" x2="72.0" y2="184.5" stroke="#8e1b10" stroke-width="1.1"/>
+<line x1="69.0" y1="110.7" x2="75.0" y2="110.7" stroke="#8e1b10" stroke-width="1.0"/>
+<line x1="69.0" y1="184.5" x2="75.0" y2="184.5" stroke="#8e1b10" stroke-width="1.0"/>
+<circle cx="72.0" cy="139.3" r="7.0" fill="#8e1b10" stroke="#111" stroke-width="1.1" fill-opacity="1.0"/>
+<circle cx="72.0" cy="139.3" r="2.6" fill="#fff" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="82.0" y="153.3" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">32B DiD+norm+redact (87.1% / 82.4%*, 0.0%)</text>
+<line x1="618.0" y1="174.5" x2="618.0" y2="271.5" stroke="#0b8043" stroke-width="1.1"/>
+<line x1="615.0" y1="174.5" x2="621.0" y2="174.5" stroke="#0b8043" stroke-width="1.0"/>
+<line x1="615.0" y1="271.5" x2="621.0" y2="271.5" stroke="#0b8043" stroke-width="1.0"/>
+<line x1="509.1" y1="218.1" x2="732.8" y2="218.1" stroke="#0b8043" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="618.0" cy="218.1" r="5.2" fill="#0b8043" stroke="#111" stroke-width="0.8" fill-opacity="1.0"/>
+<text x="609.0" y="212.1" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" fill="#222">Gemma4-31B record (71.8%, 42.5%)</text>
+<line x1="72.0" y1="134.1" x2="72.0" y2="219.0" stroke="#0b8043" stroke-width="1.1"/>
+<line x1="69.0" y1="134.1" x2="75.0" y2="134.1" stroke="#0b8043" stroke-width="1.0"/>
+<line x1="69.0" y1="219.0" x2="75.0" y2="219.0" stroke="#0b8043" stroke-width="1.0"/>
+<polygon points="72.0,163.1 78.5,175.1 65.5,175.1" fill="#0b8043" stroke="#111" stroke-width="0.8"/>
+<text x="82.0" y="183.6" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">Gemma4-31B DiD (81.2% / 78.8%*, 0.0%)</text>
+<line x1="72.0" y1="101.8" x2="72.0" y2="170.1" stroke="#0b8043" stroke-width="1.1"/>
+<line x1="69.0" y1="101.8" x2="75.0" y2="101.8" stroke="#0b8043" stroke-width="1.0"/>
+<line x1="69.0" y1="170.1" x2="75.0" y2="170.1" stroke="#0b8043" stroke-width="1.0"/>
+<circle cx="72.0" cy="127.2" r="7.0" fill="#0b8043" stroke="#111" stroke-width="1.1" fill-opacity="1.0"/>
+<circle cx="72.0" cy="127.2" r="2.6" fill="#fff" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="82.0" y="120.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="bold" fill="#0b8043">Gemma4-31B prm &amp; DiD+norm PEAK (89.4% / 84.7%*, 0.0%)</text>
+<line x1="543.0" y1="297.2" x2="543.0" y2="404.0" stroke="#00897b" stroke-width="1.1"/>
+<line x1="540.0" y1="297.2" x2="546.0" y2="297.2" stroke="#00897b" stroke-width="1.0"/>
+<line x1="540.0" y1="404.0" x2="546.0" y2="404.0" stroke="#00897b" stroke-width="1.0"/>
+<line x1="439.2" y1="351.5" x2="657.5" y2="351.5" stroke="#00897b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="543.0" cy="351.5" r="5.2" fill="#00897b" stroke="#111" stroke-width="0.8" fill-opacity="1.0"/>
+<text x="552.0" y="347.5" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">gpt-oss-20B record (45.9%, 36.7%)</text>
+<line x1="114.8" y1="268.1" x2="114.8" y2="375.2" stroke="#00897b" stroke-width="1.1"/>
+<line x1="111.8" y1="268.1" x2="117.8" y2="268.1" stroke="#00897b" stroke-width="1.0"/>
+<line x1="111.8" y1="375.2" x2="117.8" y2="375.2" stroke="#00897b" stroke-width="1.0"/>
+<line x1="88.7" y1="321.2" x2="178.1" y2="321.2" stroke="#00897b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<rect x="110.0" y="316.4" width="9.6" height="9.6" fill="#00897b" stroke="#111" stroke-width="0.8"/>
+<text x="123.8" y="333.2" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">gpt-oss-20B prompt (51.8%, 3.3%)</text>
+<line x1="82.7" y1="234.0" x2="82.7" y2="339.6" stroke="#00897b" stroke-width="1.1"/>
+<line x1="79.7" y1="234.0" x2="85.7" y2="234.0" stroke="#00897b" stroke-width="1.0"/>
+<line x1="79.7" y1="339.6" x2="85.7" y2="339.6" stroke="#00897b" stroke-width="1.0"/>
+<line x1="73.9" y1="284.8" x2="130.7" y2="284.8" stroke="#00897b" stroke-width="1.0" stroke-dasharray="2,2"/>
+<circle cx="82.7" cy="284.8" r="7.0" fill="#00897b" stroke="#111" stroke-width="1.1" fill-opacity="1.0"/>
+<circle cx="82.7" cy="284.8" r="2.6" fill="#fff" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="92.7" y="279.8" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.3" text-anchor="start" font-weight="normal" fill="#222">gpt-oss-20B DiD+norm (58.8%, 0.8%)</text>
+<rect x="748.0" y="48.0" width="218.0" height="345.0" fill="#ffffff" stroke="#ddd" stroke-width="1" rx="4"/>
+<text x="754.0" y="64.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11" text-anchor="start" font-weight="bold" fill="#111">Model Families</text>
+<circle cx="761.0" cy="78.0" r="4.5" fill="#0a7a2f" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="82.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">ToolSolver (reference)</text>
+<circle cx="761.0" cy="95.0" r="4.5" fill="#0b8043" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="99.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">Gemma 4 31B-IT (Q4_K_M)</text>
+<circle cx="761.0" cy="112.0" r="4.5" fill="#c0392b" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="116.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">Qwen3-32B (Q4_K_M)</text>
+<circle cx="761.0" cy="129.0" r="4.5" fill="#1f6feb" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="133.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">Qwen3-14B (Q4_K_M)</text>
+<circle cx="761.0" cy="146.0" r="4.5" fill="#00897b" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="150.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">OpenAI gpt-oss-20B (MXFP4)</text>
+<circle cx="761.0" cy="163.0" r="4.5" fill="#6b4ce6" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="167.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">Qwen2.5-7B-FC</text>
+<circle cx="761.0" cy="180.0" r="4.5" fill="#8a6500" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="184.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">MedGemma-4B-IT (react_json)</text>
+<circle cx="761.0" cy="197.0" r="4.5" fill="#666666" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="201.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.1" text-anchor="start" font-weight="normal" fill="#111">OpenBioLLM-8B (react_json)</text>
+<text x="754.0" y="232.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="11" text-anchor="start" font-weight="bold" fill="#111">Policy Visibility / Mode</text>
+<circle cx="761.0" cy="246.0" r="4.5" fill="#555" stroke="#111" stroke-width="0.6" fill-opacity="1.0"/>
+<text x="772.0" y="250.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="start" font-weight="normal" fill="#111">record (no policy in prompt)</text>
+<rect x="756.8" y="258.8" width="8.4" height="8.4" fill="#555" stroke="#111" stroke-width="0.6"/>
+<text x="772.0" y="267.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="start" font-weight="normal" fill="#111">prompt (policy in prompt)</text>
+<polygon points="761.0,274.5 766.5,280.0 761.0,285.5 755.5,280.0" fill="#555" stroke="#111" stroke-width="0.6"/>
+<text x="772.0" y="284.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="start" font-weight="normal" fill="#111">prompt + --api-norm (S14)</text>
+<polygon points="761.0,291.5 766.5,301.5 755.5,301.5" fill="#555" stroke="#111" stroke-width="0.6"/>
+<text x="772.0" y="301.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="start" font-weight="normal" fill="#111">enforced / prompt_enforced</text>
+<circle cx="761.0" cy="314.0" r="5.5" fill="#0b8043" stroke="#111" stroke-width="0.9" fill-opacity="1.0"/>
+<circle cx="761.0" cy="314.0" r="2.0" fill="#fff" stroke="#111" stroke-width="0.5" fill-opacity="1.0"/>
+<text x="772.0" y="318.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="9.0" text-anchor="start" font-weight="normal" fill="#111">Defense-in-Depth peak / ceiling</text>
+<text x="754.0" y="346.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.8" text-anchor="start" font-weight="bold" fill="#0b8043">Gemma4-31B DiD+norm: 89.4% (84.7%*)</text>
+<text x="754.0" y="359.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.8" text-anchor="start" font-weight="bold" fill="#8e1b10">Qwen3-32B DiD+norm+red: 87.1% (82.4%*)</text>
+<text x="754.0" y="372.0" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="8.8" text-anchor="start" font-weight="bold" fill="#222">Both at 0/120 (0.0%) violations</text>
+</svg>
