@@ -1,6 +1,6 @@
 # WardBench
 
-Author: Vadim Nareyko. Built by the team at [arviser.com](https://arviser.com).
+Author: Vadim Nareyko, Founder at [Arviser Sp. z o.o.](https://arviser.com) (Warsaw, KRS 0001068182). Commercial [LLM Quality Audits](https://arviser.com/llm-quality-audit) (from EUR 8,000) and [32h Eval CI Sprints](https://arviser.com/services/eval-ci-harness) (from EUR 3,100) are delivered via [arviser.com](https://arviser.com).
 
 License: [Apache-2.0](LICENSE) (see [NOTICE](NOTICE) for Synthea attribution).
 
